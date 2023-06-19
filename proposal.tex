@@ -24,7 +24,7 @@ Towards a data sharing platform for "Cyber Threat Intelligence" information focu
 
 \section{Background and Related Work} % 4 pages
 
-\subsection*{Background}
+\subsection{Background}
 \subsubsection*{Smart Grid Security}
 A smart grid is an advanced electrical grid that uses advanced technologies to efficiently manage the generation, distribution, and consumption of electricity. Smart grid security involves protecting the system from cybersecurity threats that can disrupt or damage the grid's operations. It could be divided into three layers: physical security, network security, and data security. Physical security includes measures to protect the physical infrastructure of the grid, such as substations, transformers, and power lines. This can include fencing, security cameras, and access controls. Network security involves protecting the communication networks used by the smart grid. This can include implementing firewalls, intrusion detection systems, and encryption to prevent unauthorized access or attacks. Data security involves protecting the data generated and used by the smart grid, including customer data, operational data, and control data. This can include implementing access controls, data encryption, and backup and recovery systems to ensure the availability and integrity of the data. 
 
@@ -40,13 +40,41 @@ There are several approaches and frameworks for sharing CTI, including commercia
 
 Despite the benefits of CTI sharing, there are also gaps and limitations that need to be addressed. These include concerns around privacy, legal and regulatory barriers, lack of trust among participants, and difficulties in sharing information in real-time. In addition, the lack of a standardized format for CTI sharing can make it challenging for organizations to share and use CTI effectively. As such, efforts to standardize CTI sharing formats and improve trust among participants are critical for improving the effectiveness of CTI sharing initiatives.
 
-\subsection*{Data Spaces}
-The term data spaces was first coined by Franklin et al to describe a new paradigm for data management \cite{franklin_databases_2005}. The objective is to offer a consolidated perspective of data gathered from diverse origins, encompassing databases, files, and web services. Data spaces are built to be adaptable and expandable, enabling users to incorporate new data sources as required. They also facilitate data integration and sharing among various applications and systems. Typically, data spaces employ a federated architecture, where each data source is represented as a network node, interconnected by links that depict relationships between the data sources. This setup empowers users to query data from multiple sources using a unified query language. Moreover, data spaces are designed with scalability in mind, allowing users to add new nodes and links as necessary, accommodating the growing volume of data. Security is a crucial aspect of data spaces, enabling users to control access to their data through access control policies that define authorized data access. Furthermore, data spaces are designed to be extensible, enabling users to incorporate additional data sources and links without altering the existing ones. Interoperability is also a fundamental feature, enabling data sharing between diverse applications and systems by establishing data exchange formats that outline the rules for data interchange. In other words:
+\subsubsection*{Data Spaces}
+The term data spaces term was first coined by Franklin et al to describe a new paradigm for data management \cite{franklin_databases_2005}. It solves some data integration tasks by offering a consolidated perspective of data residing in diverse origins, encompassing databases, files, and web services without physically transfer the data. He proposed a DataSpace Suppport Platform (DSSP) that helps developers by enabling them to query and manipulate the data from multiple sources using a single query language with the help of this unified view of data sources.
 
-"Data Spaces are defined as: A federated, open infrastructure for sovereign data sharing, based on common policies, rules and standards." \cite{reiberg2022data}
+Beside its technological definition, one could define data spaces from an economic point of view, where data spaces is a form of data exchange. In this viewpoint, dataspaces describes a situation where two or more organizations exchnage data to gain a common benefit. \cite{reiberg2022data}
 
-\subsection*{Related Work}
+However, there is not a single definition of data spaces. Dataspaces is a concept to fulfill several requirements. In different contexts, different requirements are more important than others. 
+
+Data sharing or integration is one requirement. Data spaces could be used to integrate data from different sources. It could also be viewed as a data exchange platform in some contexts.
+
+Another crucial requirement, that makes data spaces interesting, is the sovereignty of data. Sovereignty can generally be defined as supreme authority. In the context of data, it denotes the right of the owner to control how and by whom will the data be used. Data spaces could fulfill this requirement by keeping the data in the data source and providing a unified view of the data to the consumers with respect to the access control policies defined by the owner of the data.
+
+Another aspect of data spaces is its governance. It is required to define a set of policies, rules and protocols to ensure a smooth exchange of data. Therefore, a governance body is expected to be established to define and enforce these policies. \cite{reiberg2022data}
+
+Data spaces should be open, meaning anyone complying with the policies should be able to join without restriction. This encourages a fair and non-monopolistic market. This entails an easy access, which means, anyone could be able to connect with a limited effort.
+
+Data spaces are usually designed to be decentralized and federated. Meaning there is no entity having direct control over all data exchanges. Different participants could interact with each other directly. This emphasizes the role of interoperability. This is only possible when certain open standards are established. Consequently, data spaces complying to the same standards could be embedded inside each other enabling cross-data-space exchange \cite{reiberg2022data}.
+
+\noindent\fbox{%
+    \parbox{\textwidth}{%
+    "Data Spaces are defined as: A federated, open infrastructure for sovereign data sharing, based on common policies, rules and standards." \cite{reiberg2022data}
+    }%
+}
+
+\subsection{Related Work}
+
+\subsubsection*{EE-ISAC}
 European Energy Information Sharing and Analysis Centre (EE-ISAC) is a non-profit organization that facilitates the exchange of cyber threat information between its members. Since its foundation in 2015 it acquired over 30 members from utilities, academia, governmental and non-governmental organizations. Members exchange cyber threat information through plenary meetings, working groups, and a dedicated platform (based on MISP). EE-ISAC facilitates trust based information exchange which is not present in the mandatory information sharing in the NIS directive. This trust is achieved by confideniality agreements and regular physical meetings with the same members. \cite{isacpractical_2022}
+
+\subsubsection*{IDS}
+The International Data Spaces (IDS) is an initiative with the goal of designing a distributed software architecture for data exchange with sovereignty. It was launched in 2015 as a Fraunhofer research project funded by the German Federal Ministry for Education and Research \cite{otto_evolution_2022}. Shortly after that, in 2016, the IDS Association (IDSA) was founded as a non-profit organization to continue the research. It resulted in definition of the IDS Reference Architecture Model (IDS RAM). The IDS RAM is the description of IDS components and their interactions without being technology specific \cite{otto_evolution_2022}. IDS RAM allows anyone to implement the IDS compliant components using any technology. The IDSA also provides a reference implementation of different IDS components called IDS Testbed.  
+
+Components \cite{pettenpohl_international_2022}
+
+\subsubsection*{Gaia-X}
+Gaia-X is a European initiative to create a federated data infrastructure for Europe. It is a non-profit organization that aims to create a secure, 
 
 
 
