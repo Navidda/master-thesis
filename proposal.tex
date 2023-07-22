@@ -40,10 +40,15 @@ There are several approaches and frameworks for sharing CTI, including commercia
 
 Despite the benefits of CTI sharing, there are also gaps and limitations that need to be addressed. These include concerns around privacy, legal and regulatory barriers, lack of trust among participants, and difficulties in sharing information in real-time. In addition, the lack of a standardized format for CTI sharing can make it challenging for organizations to share and use CTI effectively. As such, efforts to standardize CTI sharing formats and improve trust among participants are critical for improving the effectiveness of CTI sharing initiatives.
 
+\subsubsection*{Data Modeling}
+In the context of CTI sharing, data modelling serves three purposes: (1) to provide a backbone for all relevant information, (2) to specify the data input format for further analysis, (3) to define the desired target for information gathering.
+
+Heterogeneous data formats from different incompatible security tools.
+
 \subsubsection*{Data Spaces}
 The term data spaces term was first coined by Franklin et al to describe a new paradigm for data management \cite{franklin_databases_2005}. It solves some data integration tasks by offering a consolidated perspective of data residing in diverse origins, encompassing databases, files, and web services without physically transfer the data. He proposed a DataSpace Suppport Platform (DSSP) that helps developers by enabling them to query and manipulate the data from multiple sources using a single query language with the help of this unified view of data sources.
 
-Beside its technological definition, one could define data spaces from an economic point of view, where data spaces is a form of data exchange. In this viewpoint, dataspaces describes a situation where two or more organizations exchnage data to gain a common benefit. \cite{reiberg2022data}
+Beside its technological definition, one could define data spaces from an economic point of view, where data spaces is a form of data exchange. In this viewpoint, dataspaces describes a situation where two or more organizations exchange data to gain a common benefit. \cite{reiberg_what_2022}
 
 However, there is not a single definition of data spaces. Dataspaces is a concept to fulfill several requirements. In different contexts, different requirements are more important than others. 
 
@@ -51,38 +56,87 @@ Data sharing or integration is one requirement. Data spaces could be used to int
 
 Another crucial requirement, that makes data spaces interesting, is the sovereignty of data. Sovereignty can generally be defined as supreme authority. In the context of data, it denotes the right of the owner to control how and by whom will the data be used. Data spaces could fulfill this requirement by keeping the data in the data source and providing a unified view of the data to the consumers with respect to the access control policies defined by the owner of the data.
 
-Another aspect of data spaces is its governance. It is required to define a set of policies, rules and protocols to ensure a smooth exchange of data. Therefore, a governance body is expected to be established to define and enforce these policies. \cite{reiberg2022data}
+Another aspect of data spaces is its governance. It is required to define a set of policies, rules and protocols to ensure a smooth exchange of data. Therefore, a governance body is expected to be established to define and enforce these policies. \cite{reiberg_what_2022}
 
 Data spaces should be open, meaning anyone complying with the policies should be able to join without restriction. This encourages a fair and non-monopolistic market. This entails an easy access, which means, anyone could be able to connect with a limited effort.
 
-Data spaces are usually designed to be decentralized and federated. Meaning there is no entity having direct control over all data exchanges. Different participants could interact with each other directly. This emphasizes the role of interoperability. This is only possible when certain open standards are established. Consequently, data spaces complying to the same standards could be embedded inside each other enabling cross-data-space exchange \cite{reiberg2022data}.
+Data spaces are usually designed to be decentralized and federated. Meaning there is no entity having direct control over all data exchanges. Different participants could interact with each other directly. This emphasizes the role of interoperability. This is only possible when certain open standards are established. Consequently, data spaces complying to the same standards could be embedded inside each other enabling cross-data-space exchange \cite{reiberg_what_2022}.
 
 \noindent\fbox{%
     \parbox{\textwidth}{%
-    "Data Spaces are defined as: A federated, open infrastructure for sovereign data sharing, based on common policies, rules and standards." \cite{reiberg2022data}
+    "Data Spaces are defined as: A federated, open infrastructure for sovereign data sharing, based on common policies, rules and standards." \cite{reiberg_what_2022}
     }%
 }
 
 \subsection{Related Work}
 
 \subsubsection*{EE-ISAC}
-European Energy Information Sharing and Analysis Centre (EE-ISAC) is a non-profit organization that facilitates the exchange of cyber threat information between its members. Since its foundation in 2015 it acquired over 30 members from utilities, academia, governmental and non-governmental organizations. Members exchange cyber threat information through plenary meetings, working groups, and a dedicated platform (based on MISP). EE-ISAC facilitates trust based information exchange which is not present in the mandatory information sharing in the NIS directive. This trust is achieved by confideniality agreements and regular physical meetings with the same members. \cite{isacpractical_2022}
+European Energy Information Sharing and Analysis Centre (EE-ISAC) is a non-profit organization that facilitates the exchange of cyber threat information between its members. Since its foundation in 2015 it acquired over 30 members from utilities, academia, governmental and non-governmental organizations. Members exchange cyber threat information through plenary meetings, working groups, and a dedicated platform (based on MISP). EE-ISAC facilitates trust based information exchange which is not present in the mandatory information sharing in the NIS directive. This trust is achieved by confidentiality agreements and regular physical meetings with the same members. 
+\cite{wallis_ee-isacpractical_2022}
 
 \subsubsection*{IDS}
-The International Data Spaces (IDS) is an initiative with the goal of designing a distributed software architecture for data exchange with sovereignty. It was launched in 2015 as a Fraunhofer research project funded by the German Federal Ministry for Education and Research \cite{otto_evolution_2022}. Shortly after that, in 2016, the IDS Association (IDSA) was founded as a non-profit organization to continue the research. It resulted in definition of the IDS Reference Architecture Model (IDS RAM). The IDS RAM is the description of IDS components and their interactions without being technology specific \cite{otto_evolution_2022}. IDS RAM allows anyone to implement the IDS compliant components using any technology. The IDSA also provides a reference implementation of different IDS components called IDS Testbed.  
+The International Data Spaces (IDS) is an initiative with the goal of creating a standard for a distributed software architecture for data exchange with sovereignty. It was launched in 2015 as a Fraunhofer research project funded by the German Federal Ministry for Education and Research \cite{otto_evolution_2022}. Shortly after that, in 2016, the IDS Association (IDSA) was founded as a non-profit organization to continue the research. It resulted in definition of the IDS Reference Architecture Model (IDS RAM). The IDS RAM is the description of IDS components and their interactions without being technology specific \cite{otto_evolution_2022}. IDS RAM allows anyone to implement the IDS compliant components using any technology. The IDSA also provides a reference implementation of different IDS components called IDS Testbed \cite{ids_testbed_webpage}. 
 
-Components \cite{pettenpohl_international_2022}
+IDS RAM defines the following components \cite{pettenpohl_international_2022}:
+- Connector: The connector is the interface between the IDS ecosystem and the data source. It is responsible for the data exchange and the enforcement of the usage control policies as well as authentication.
+- Identity Provider: authentication service managing identity information
+- IDS Broker: Manages the metadata (description and usage policies)
+- Clearing House: Audits the data exchange and manages the payment
+- IDS Apps: Process the exchanged data. Deployed within Connector.
+- App Store: Provides IDS apps
+- Vocabulary Provider: Offers vocabularies to describe and annotate data
+
+Furthermore, the participants could undertake different roles \cite{pettenpohl_international_2022}:
+- Data Owner: Controls the data and defines usage policies and payment model.
+- Data Provider: Provides the data to the IDS ecosystem with respect to the policies defined by the data owner.
+- Data Consumer: Same as data provider but consumes the data.
+- Data User: Same as data owner but uses the data.
+- App Provider
+- ...
+
+
+Usage Control:
+
+Certification:
+
+
 
 \subsubsection*{Gaia-X}
-Gaia-X is a European initiative to create a federated data infrastructure for Europe. It is a non-profit organization that aims to create a secure, 
+European data strategy Towards a single market of data. + technological independence of Europe. No vendor lock-in. Launched in 2019. Sovereign digital ecosystem
+Gaia-X is an initiative that aims to foster generation of a data and service infrastructure by developing regulations and technical specifications which is based on European values, applicable to any existing cloud and edge technology stack. Gaia-X allows for transparency, controllability, portability and interoperability across data and services. It will ease value creation through data collection and sharing between organizations leading to a vibrant data ecosystem across Europe and beyond. Gaia-X Association deliverables include federation services, common policy rules and an architecture of standards. (Data sovereignty?) Federation services could be utilized by the ecosystem participants to achieve a global interoperability, compliance and effortless set up. This includes, "Identity and Trust", "Federated Catalog" and "Data Exchange services". \cite{otto_role_2022}
+AISBL: Gaia-X Association
+Nodes, Services (Any cloud service), Service Instances (A service running on a node) and Data Assets (a data set on a node)
+Participants: Organizations and individuals that are part of the Gaia-X ecosystem
+Clearing House: Middle man in the exchange checking for compliance
+
+\subsubsection*{Comparision of IDS and Gaia-X}
+Gaia X 2019, IDS 2015. IDS is more mature. it is already tested in the industry. Gaia X is still in the development phase.
+Gaia X offers a more holistic approach including cloud elements.
+Gaia X is more focused on cloud services. IDS is more focused on data exchange.
+Gaia X is more focused on the business and economic side. IDS is more focused on the technical side.
+Gaia-X could use IDS as a component \cite{otto_role_2022}
+Gaia-X provides standards for infrastructures and cloud elements. IDS provides standards for data exchange.
+Federated Catalog ~ IDS Broker + Vocabulary Provider + Information Model
+Identity and Trust ~ IDS Identity Provider + Dynamic Attribute Provisioning Service (DAPS)
+Gaia X Sovereign Data Exchange ~ IDS Usage Control and Clearing House
+Gaia X Node ~ IDS Connector
+
+- Documentation: 
+- Maturity: Gaia-X is still in the development phase. IDS is more mature.
+- Implementation: IDS is open source and has a reference implementation. Gaia-X is not open source and does not have a reference implementation.
 
 
+
+\subsubsection*{Other Platforms}
+Platform Industrie 4.0, 
+SWIPO: is an association that develops and safeguards codes of conduct to facilitate Switching and Porting of non-personal data between cloud providers and their customers.
+It follows the Free Flow of Non-Personal Data regulation.
 
 \section{Use case and Requirements} % 3 Pages
 
 \section{Conceptual Approach} % 1.5 Pages
 
-\section{Realisation / Implementation} % 1 Page
+\section{Realization / Implementation} % 1 Page
 
 
 \section{Evaluation} % 0.5 Page
