@@ -18,7 +18,7 @@
 
 \subsection{Thesis Goal}
 
-Towards a data sharing platform for "Cyber Threat Intelligence" information focused in the Smart Grid use case, that supports privacy and sovereignty of data to increase the security of smart electricity infrastructure.
+Towards a data sharing platform for "Cyber Threat Intelligence" information focused on the Smart Grid use case, that supports privacy and sovereignty of data to increase the security of smart electricity infrastructure.
 
 \subsection{Outline}
 
@@ -137,13 +137,78 @@ It follows the Free Flow of Non-Personal Data regulation.
 The sharing is caring paper \cite{jesus_sharing_2023}
 
 \section{Use case and Requirements} % 3 Pages
+Scenario
+Requirements
+Constraints
+
+Two motivations for usage control:
+- Internal: 
+- External: EU-GDPR
+
+Stake-holders and their profile
+- Utility Provider
+- Utility Operator
+- BSI (in Germany)
+
+- Confidentiality
+- Security
+- Do we need plausible deniability?
+- Combat against free-riding
+- Trust and reputation
+
 
 \section{Conceptual Approach} % 1.5 Pages
 
-\section{Realization / Implementation} % 1 Page
+Components and relation to requirements
+Discuss Benefits and limitations
+Compare with existing solutions
 
+
+Important data space components that are relevant to our use case are listed below. The descriptions are fully conformant to the IDSA RAM 4.0 \cite{otto_ids_2019}.
+\begin{itemize}
+    \item Connector: It is the primary component involved in the data exchange acting either as data provider or consumer. Not only it performs the actual data exchange but also the enforcement of the usage control policies as well as authentication. It can be operated on-premises or in a cloud environment. It will run the IDS Apps that do process the data among other things (more on that later). It uses application container management technology to isolate data apps and core functionalities.
+    \item IDS Broker: The IDS Metadata Broker is an IDS Connector, which contains an endpoint for the registration, publication, maintenance, and query of Self-Descriptions. Self-Descriptions encapsulate information about Connectors, their managing participant, the offered data assets, and the respective usage conditions. In a sense, the IDS Broker is like a phonebook.
+    \item Identity Provider: This is the component serving as Identity and Access Management (IAM). It's responsible for assigning identities to participants, verifying identity claims and granting access based on identities. It comprises three components: 
+        \begin{itemize}
+            \item CAs: One or multiple certificate authorities are responsible for issuing certificates to participants upon request. They are also responsible for revoking certificates. They are the trust anchors by which all other components can be verified.
+            \item Dynamic Attribute Provisioning Service (DAPS): It complements the certificates issued by CAs with more volatile attributes in form of tokens. Connectors can request Dynamic Attribute Tokens (DATs) from DAPS to prove their attributes to other components.
+            \item Participant Information Service (ParIS):  It provides business-related information about participants in the IDS that have been checked by the Support Organization. Similar to the way Broker provides metadata about data assets, ParIS provides metadata about participants.
+        \end{itemize}
+    \item Clearing House: It is a trusted third party in the data exchange that logs all the required information about clearing, billing, and usage control. It keeps track of the payment information and also usage information to help verify the compliance with the usage policies.
+    \item IDS Apps: These are re-usable software components that can be deployed inside the IDS Connector. They are mainly used to transform or analyze data. However, they can also be used to connect to enterprise services, or to allow the connector to be controlled by external systems. Data apps can be chained and bundled.
+    \item App Store: As the name suggests, it is a marketplace for IDS Apps. It contains endpoints to publish, search, and download IDS Apps. It is a Connector on its own, so it should pass the IDS certification criteria and provide a self-description.
+    \item Vocabulary Provider: To facilitate cooperation of different IDS components, a common vocabulary is required. The vocabulary provider enables the participants to define and publish their own vocabularies. Vocabularies typically follow the RDF standard. An example usage is to reference an RDF URI in the Self-Description of a data asset.
+\end{itemize}
+
+New Components:
+- Sanitization App
+
+\section{Realization / Implementation} % 1 Page
+Which technology and tools you use?
+
+- How sanitization will be done
+    - Some details on the sanitization 
+- Which parts will you implement yourself, and which part you copy?
+    - IDS Testbed
+    - 
+- Talk about how usage policies are enforced?
+    - MYDATA
+        - PAP: UI
+        - PDP: in connector
+        - PEP
+- How they fit with dataspace components?
+
+Architecture
 
 \section{Evaluation} % 0.5 Page
+Methodology and Metrics
+Test scenario
+
+- How to gather (CTI) data?
+- Metrics for evaluating the privacy? (e.g. entropy)
+- The steps of the scenario and the expected results
+- How to measure the performance?
+
 
 \section{Timeline / Milestones / Project Plan} % 0.75 Page
 
