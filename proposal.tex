@@ -1,6 +1,8 @@
 \documentclass{article}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{url}
+\usepackage{tikz}
+\graphicspath{{./out/diagram/}}
 
 \title{MA-Proposal-Danesh}
 \author{Navid Rahimidanesh}
@@ -110,7 +112,7 @@ Nodes, Services (Any cloud service), Service Instances (A service running on a n
 Participants: Organizations and individuals that are part of the Gaia-X ecosystem
 Clearing House: Middle man in the exchange checking for compliance
 
-\subsubsection*{Comparision of IDS and Gaia-X}
+\subsubsection*{Comparison of IDS and Gaia-X}
 Gaia X 2019, IDS 2015. IDS is more mature. it is already tested in the industry. Gaia X is still in the development phase.
 Gaia X offers a more holistic approach including cloud elements.
 Gaia X is more focused on cloud services. IDS is more focused on data exchange.
@@ -135,6 +137,8 @@ It follows the Free Flow of Non-Personal Data regulation.
 
 \subsubsection*{Crowd Sourced Sharing}
 The sharing is caring paper \cite{jesus_sharing_2023}
+
+% ---------------------------------------------------------------
 
 \section{Use case and Requirements} % 3 Pages
 Scenario
@@ -163,8 +167,14 @@ Components and relation to requirements
 Discuss Benefits and limitations
 Compare with existing solutions
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{component_diagram}
+    \caption{System Architecture Diagram}
+    \label{fig:system-architecture}
+\end{figure}
 
-Important data space components that are relevant to our use case are listed below. The descriptions are fully conformant to the IDSA RAM 4.0 \cite{otto_ids_2019}.
+Important data space components that are relevant to our use case are listed below. The descriptions fully conform to the IDSA RAM 4.0 \cite{otto_ids_2019}.
 \begin{itemize}
     \item Connector: It is the primary component involved in the data exchange acting either as data provider or consumer. Not only it performs the actual data exchange but also the enforcement of the usage control policies as well as authentication. It can be operated on-premises or in a cloud environment. It will run the IDS Apps that do process the data among other things (more on that later). It uses application container management technology to isolate data apps and core functionalities.
     \item IDS Broker: The IDS Metadata Broker is an IDS Connector, which contains an endpoint for the registration, publication, maintenance, and query of Self-Descriptions. Self-Descriptions encapsulate information about Connectors, their managing participant, the offered data assets, and the respective usage conditions. In a sense, the IDS Broker is like a phonebook.
@@ -180,8 +190,11 @@ Important data space components that are relevant to our use case are listed bel
     \item Vocabulary Provider: To facilitate cooperation of different IDS components, a common vocabulary is required. The vocabulary provider enables the participants to define and publish their own vocabularies. Vocabularies typically follow the RDF standard. An example usage is to reference an RDF URI in the Self-Description of a data asset.
 \end{itemize}
 
-New Components:
-- Sanitization App
+Apart from the components described by the IDS RAM, there are other components that are not part of the IDS RAM but are relevant to our use case. These components are described below.
+
+\begin{itemize}
+    \item Sanitization App: This is an IDS App that is responsible for sanitizing the data. It is deployed inside the IDS Connector. It is responsible for removing the sensitive information from the data before it is shared with other participants. IDS App is suitable for this task because dealing with sensitive data requires a high level of trust. Apps are certified and verified by the App Store. Furthermore, they are executed within the Connector, so they have access to the data before it is shared with other participants. This is important because it prevents the data from being leaked before it is sanitized. 
+\end{itemize}
 
 \section{Realization / Implementation} % 1 Page
 Which technology and tools you use?
