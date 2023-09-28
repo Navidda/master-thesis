@@ -2,7 +2,9 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage{url}
 \usepackage{tikz}
-\graphicspath{{./out/diagram/}}
+\usepackage{hyperref}
+
+\graphicspath{{./diagram/}}
 
 \title{MA-Proposal-Danesh}
 \author{Navid Rahimidanesh}
@@ -198,7 +200,7 @@ Apart from the components described by the IDS RAM, there are other components t
 
 \section{Realization / Implementation} % 1 Page
 Which technology and tools you use?
-
+Architecture
 - How sanitization will be done
     - Some details on the sanitization 
 - Which parts will you implement yourself, and which part you copy?
@@ -211,7 +213,28 @@ Which technology and tools you use?
         - PEP
 - How they fit with dataspace components?
 
-Architecture
+For the implementation part, a couple of open-source projects from IDSA is going to be utilized. \href{https://github.com/International-Data-Spaces-Association/IDS-testbed}{IDS Testbed} is an open-source project by the IDSA that features sample implementations of some IDS components. The version 1.0 is currently available, which contains implementations for the following components: Connector, Metadata Broker, DAPS, and Certificate Authority. That means the following components are to be implemented from scratch: App Store, ParIS, Clearing House, Vocabulary Hub. Of course, the required IDS Apps should be implemented. 
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    \textbf{Component} & \textbf{Source Code} & \textbf{Version} & \textbf{Language} \\
+    \hline
+    Connector & \href{https://github.com/International-Data-Spaces-Association/DataspaceConnector/tree/v8.0.2}{Connector Git} & 8.0.2 & Java \\
+    \hline
+    Metadata Broker & \href{https://github.com/International-Data-Spaces-Association/metadata-broker-open-core}{Broker Git} & 5.0.3 & Java \\
+    \hline
+    DAPS & \href{https://github.com/International-Data-Spaces-Association/omejdn-daps}{DAPS Git} & 1.6.0 & Ruby \\
+    \hline
+    Certificate Authority & \href{https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/CertificateAuthority}{Testbed Git} & NaN & Python \\
+    \hline
+    
+
+    \end{tabular}
+    \caption{Example table}
+    \label{tab:example}
+\end{table}
 
 \section{Evaluation} % 0.5 Page
 Methodology and Metrics

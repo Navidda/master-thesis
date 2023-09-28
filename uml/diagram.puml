@@ -1,5 +1,5 @@
 @startuml component_diagram
-skinparam componentStyle rectangle
+' skinparam componentStyle rectangle
 
 database "Data Source" as DB1 
 [IDS Connector] as C1
@@ -11,6 +11,12 @@ database "Data Sink" as DB2
 
 component "App Store" as AS {
   [App] as AP
+}
+
+component "Identity Provider" as IDP {
+  [Certificate Authority] as CA
+  [DAPS] as DAPS
+  [ParIS] as ParIS
 }
 
 note as N1
@@ -35,4 +41,6 @@ C2 ..> MB: metadata
 
 C2 <..> VH: metadata
 C1 <.. AS: app
+
+DAPS ..> C2: token
 @enduml
