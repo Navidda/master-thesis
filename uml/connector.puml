@@ -1,0 +1,10 @@
+@startuml connector
+skinparam componentStyle rectangle
+
+component "IDS Connector" as C {
+    [Connector Core]
+    [MYDATA]
+    [Sanitization App]
+}
+
+@enduml

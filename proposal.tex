@@ -80,7 +80,7 @@ European Energy Information Sharing and Analysis Centre (EE-ISAC) is a non-profi
 \cite{wallis_ee-isacpractical_2022}
 
 \subsubsection*{IDS}
-The International Data Spaces (IDS) is an initiative with the goal of creating a standard for a distributed software architecture for data exchange with sovereignty. It was launched in 2015 as a Fraunhofer research project funded by the German Federal Ministry for Education and Research \cite{otto_evolution_2022}. Shortly after that, in 2016, the IDS Association (IDSA) was founded as a non-profit organization to continue the research. It resulted in definition of the IDS Reference Architecture Model (IDS RAM). The IDS RAM is the description of IDS components and their interactions without being technology specific \cite{otto_evolution_2022}. IDS RAM allows anyone to implement the IDS compliant components using any technology. The IDSA also provides a reference implementation of different IDS components called IDS Testbed \cite{ids_testbed_webpage}. 
+The International Data Spaces (IDS) is an initiative with the goal of creating a standard for a distributed software architecture for data exchange with sovereignty. It was launched in 2015 as a Fraunhofer research project funded by the German Federal Ministry for Education and Research \cite{otto_evolution_2022}. Shortly after that, in 2016, the IDS Association (IDSA) was founded as a non-profit organization to continue the research. It resulted in definition of the IDS Reference Architecture Model (IDS RAM). The IDS RAM is the description of IDS components and their interactions without being technology specific \cite{otto_evolution_2022}. IDS RAM allows anyone to implement the IDS compliant components using any technology. The IDSA also provides a reference implementation of different IDS components called IDS Testbed \cite{association_ids_2022}. 
 
 IDS RAM defines the following components \cite{pettenpohl_international_2022}:
 - Connector: The connector is the interface between the IDS ecosystem and the data source. It is responsible for the data exchange and the enforcement of the usage control policies as well as authentication.
@@ -199,27 +199,56 @@ Apart from the components described by the IDS RAM, there are other components t
 \end{itemize}
 
 \section{Realization / Implementation} % 1 Page
-Which technology and tools you use?
-Architecture
-- How sanitization will be done
-    - Some details on the sanitization 
-- Which parts will you implement yourself, and which part you copy?
-    - IDS Testbed
-    - 
-- Talk about how usage policies are enforced?
-    - MYDATA
-        - PAP: UI
-        - PDP: in connector
-        - PEP
-- How they fit with dataspace components?
+% Which technology and tools you use?
+% Architecture
+% - Which parts will you implement yourself, and which part you copy?
+%     - IDS Testbed
+%     - 
 
-For the implementation part, a couple of open-source projects from IDSA is going to be utilized. \href{https://github.com/International-Data-Spaces-Association/IDS-testbed}{IDS Testbed} is an open-source project by the IDSA that features sample implementations of some IDS components. The version 1.0 is currently available, which contains implementations for the following components: Connector, Metadata Broker, DAPS, and Certificate Authority. That means the following components are to be implemented from scratch: App Store, ParIS, Clearing House, Vocabulary Hub. Of course, the required IDS Apps should be implemented. 
+% - How they fit with dataspace components?
+
+The IDS Association publishes a monthly report of the current state of all the data connectors used for exchange of data, not limited to the IDS compliant connectors.
+Also, Dam et al. \cite{dam_survey_2023} investigated this report and published a survey in Septempber 2023. They found that only 4 connectors have their source code available on a public repository: 1) IDS Dataspace Connector (DSC) by sovity, Eclipse Dataspace Connector (EDC), the TRUsted Engineering (TRUE) Connector, and the Trusted Connector by Fraunhofer AISEC.
+
+In addition to that, I found two more: First, IDS Integration Toolbox by Open Logistics Foundation which is a wrapper around the DSC. Second, TNO Security Gateway (TSG) initially developed by TNO which has implementations for many IDS components. It is used in Smart Connected Supplier Network (SCSN) data space and has a documentation.
+However, it has no stars on gitlab.
+
+The summary of different conenctors is shown in table \ref{tab:connectors}.
 
 \begin{table}[ht]
+    \label{tab:connectors}
+    \centering
+    \begin{tabular}{| c c c c c c|}
+    \hline
+    \textbf{Name} & \textbf{Created} & \textbf{Stars} & \textbf{Commits} & \textbf{Last Release} & \textbf{Hosted} \\
+    \hline
+    \hline
+    DSC & 07.10.2020 & 27[+101] & 2600 & 10.22 & \href{https://github.com/International-Data-Spaces-Association/DataspaceConnector}{Github} \\
+    \hline
+    EDC & 13.01.2021 & 202 & 1817 & 10.23 & \href{https://github.com/eclipse-edc/Connector}{Github} \\
+    \hline
+    TRUE & 30.10.2020 & 19 & 122 & 08.23 & \href{https://github.com/Engineering-Research-and-Development/true-connector}{Github} \\
+    \hline
+    Trusted & 05.09.2017 & 43 & 2221 & 02.23 & \href{https://github.com/Fraunhofer-AISEC/trusted-connector}{Github} \\ 
+    \hline
+    Toolbox & 31.03.2022 & 3 & 172 & 04.23 & \href{https://git.openlogisticsfoundation.org/silicon-economy/base/ids/ids-integration-toolbox}{Self-Hosted} \\
+    \hline
+    TSG & 12.05.2021 & 0 & 243 & 08.23 & \href{https://gitlab.com/tno-tsg}{Gitlab} \\
+    \hline
+    \end{tabular}
+    \caption{Available IDS Connectors}
+\end{table}
+
+The IDS association defines Minimum Viable Data Space (MVDS) as the minimum set of components that provide the ability to do secure and sovereign data exchange. They specify the required components as follows: Two Connectors (a data provider and a consumer), an Identity Provider (Dynamic Attribute Provisioning Service, Certificate Authority). IDSA has published an open-source project, \href{https://github.com/International-Data-Spaces-Association/IDS-testbed}{IDS Testbed}, that contains instructions to install and orchestrate these set of minimum components. It references open-source implementations of these components, see table \ref{tab:components} to find source code of these components.
+
+\begin{table}[h]
+    \label{tab:components}
     \centering
     \begin{tabular}{|c|c|c|c|}
     \hline
     \textbf{Component} & \textbf{Source Code} & \textbf{Version} & \textbf{Language} \\
+    \hline
+    IDS Testbed & \href{https://github.com/International-Data-Spaces-Association/IDS-testbed}{Testbed Git} & 1.0 & Docker-Compose \\
     \hline
     Connector & \href{https://github.com/International-Data-Spaces-Association/DataspaceConnector/tree/v8.0.2}{Connector Git} & 8.0.2 & Java \\
     \hline
@@ -227,14 +256,27 @@ For the implementation part, a couple of open-source projects from IDSA is going
     \hline
     DAPS & \href{https://github.com/International-Data-Spaces-Association/omejdn-daps}{DAPS Git} & 1.6.0 & Ruby \\
     \hline
-    Certificate Authority & \href{https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/CertificateAuthority}{Testbed Git} & NaN & Python \\
+    Certificate Authority & \href{https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/CertificateAuthority}{Testbed Git} & --- & Python \\
     \hline
-    
-
+    App Store & \href{https://github.com/International-Data-Spaces-Association/IDS-AppStore}{App Store Git} & 3.0.0 & Java \\
+    \hline
     \end{tabular}
-    \caption{Example table}
-    \label{tab:example}
+    \caption{Necessary Components}
 \end{table}
+
+In addition to the aforementioned components, some new ones need to be implemented from scratch: App Store, ParIS, Clearing House, Vocabulary Hub. Of course, the required IDS Apps should be implemented, which includes, the Sanitization App. 
+For the App Store there is a published project (\href{https://github.com/International-Data-Spaces-Association/IDS-AppStore}{App Store Git}) which is not included in the testbed and might not be fully functional.
+
+Usage policies are enforced within the IDS Connector. 
+% - Talk about how usage policies are enforced?
+%     - MYDATA
+%         - PAP: UI
+%         - PDP: in connector
+%         - PEP
+
+% - How sanitization will be done
+%     - Some details on the sanitization 
+
 
 \section{Evaluation} % 0.5 Page
 Methodology and Metrics
