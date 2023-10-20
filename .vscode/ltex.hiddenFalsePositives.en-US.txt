@@ -1,0 +1,1 @@
+{"rule":"DOUBLE_NEGATIVE","sentence":"^\\QFurthermore, deciding whether a value contains confidential information or not is not straight-forward.\\E$"}

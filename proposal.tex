@@ -151,10 +151,11 @@ Two motivations for usage control:
 - Internal: 
 - External: EU-GDPR
 
-Stake-holders and their profile
-- Utility Provider
-- Utility Operator
-- BSI (in Germany)
+% Stake-holders (Actors) and their profile
+% - Utility Provider
+% - Utility Operator
+% - BSI (in Germany)
+% - SOC (Different levels)
 
 - Confidentiality
 - Security
@@ -171,7 +172,7 @@ Compare with existing solutions
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{component_diagram}
+    \includegraphics[width=\textwidth]{components}
     \caption{System Architecture Diagram}
     \label{fig:system-architecture}
 \end{figure}
@@ -207,13 +208,14 @@ Apart from the components described by the IDS RAM, there are other components t
 
 % - How they fit with dataspace components?
 
+\subsection*{IDS Connector}
 The IDS Association publishes a monthly report of the current state of all the data connectors used for exchange of data, not limited to the IDS compliant connectors.
-Also, Dam et al. \cite{dam_survey_2023} investigated this report and published a survey in Septempber 2023. They found that only 4 connectors have their source code available on a public repository: 1) IDS Dataspace Connector (DSC) by sovity, Eclipse Dataspace Connector (EDC), the TRUsted Engineering (TRUE) Connector, and the Trusted Connector by Fraunhofer AISEC.
+ Dam et al. \cite{dam_survey_2023} investigated this report and published a survey in September 2023. They found that only 4 connectors have their source code available on a public repository: 1) IDS Dataspace Connector (DSC) by sovity, Eclipse Dataspace Connector (EDC), the TRUsted Engineering (TRUE) Connector, and the Trusted Connector by Fraunhofer AISEC.
 
 In addition to that, I found two more: First, IDS Integration Toolbox by Open Logistics Foundation which is a wrapper around the DSC. Second, TNO Security Gateway (TSG) initially developed by TNO which has implementations for many IDS components. It is used in Smart Connected Supplier Network (SCSN) data space and has a documentation.
 However, it has no stars on gitlab.
 
-The summary of different conenctors is shown in table \ref{tab:connectors}.
+The overview of different conenctors is shown in table \ref{tab:connectors}.
 
 \begin{table}[ht]
     \label{tab:connectors}
@@ -239,6 +241,9 @@ The summary of different conenctors is shown in table \ref{tab:connectors}.
     \caption{Available IDS Connectors}
 \end{table}
 
+Most number of stars and most recent release being a deciding factor, I will choose EDC to base my implementation on.
+
+\subsection*{IDS Testbed}
 The IDS association defines Minimum Viable Data Space (MVDS) as the minimum set of components that provide the ability to do secure and sovereign data exchange. They specify the required components as follows: Two Connectors (a data provider and a consumer), an Identity Provider (Dynamic Attribute Provisioning Service, Certificate Authority). IDSA has published an open-source project, \href{https://github.com/International-Data-Spaces-Association/IDS-testbed}{IDS Testbed}, that contains instructions to install and orchestrate these set of minimum components. It references open-source implementations of these components, see table \ref{tab:components} to find source code of these components.
 
 \begin{table}[h]
@@ -267,25 +272,43 @@ The IDS association defines Minimum Viable Data Space (MVDS) as the minimum set 
 In addition to the aforementioned components, some new ones need to be implemented from scratch: App Store, ParIS, Clearing House, Vocabulary Hub. Of course, the required IDS Apps should be implemented, which includes, the Sanitization App. 
 For the App Store there is a published project (\href{https://github.com/International-Data-Spaces-Association/IDS-AppStore}{App Store Git}) which is not included in the testbed and might not be fully functional.
 
-Usage policies are enforced within the IDS Connector. 
-% - Talk about how usage policies are enforced?
-%     - MYDATA
-%         - PAP: UI
-%         - PDP: in connector
-%         - PEP
+\subsection*{Usage Policies}
+To describe usage policies IDS defines its own Usage Control Language which is an extension of Open Digital Rights Language (ODRL). It is a machine readable format which is technology agnostic. There are multiple mechanism to enforce these policies automatically. The position paper on IDS Usage Control \cite{eitel_usage_2021} lists the following mechanisms: MYDATA Control Technologies, Logic based Usage Control (LUCON), and Degree (D°). According to the paper, MYDATA Control Technologies is the most mature and comprehensive. It is also the only one that is implemented in the IDS Testbed. Therefore, I will use MYDATA Control Technologies to enforce the usage policies. The usage control is enforced in the IDS Connector possibly using a separate application container. It comprises three different components: PMP, manages policies and creating them based on some templates, PDP, evaluates the policies and decides whether to allow or deny the request, and PEP, enforces the decision made by PDP. The overview of the components is shown in figure \ref{fig:connector}.
 
-% - How sanitization will be done
-%     - Some details on the sanitization 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{connector}
+    \caption{Connector Overview}
+    \label{fig:connector}
+\end{figure}
 
+
+\subsection*{Sanitization App}
+Removing all sensitive data from CTI in general can be a difficult task. There are different CTI formats and each format has its own structure. Furthermore, deciding whether a value contains confidential information or not is not straight-forward. Even a sophisticated machine learning approach requires a lot of data with different types of confidential information to be trained on. Therefore, I will focus on creating a base sanitization app that is easily extensible to detect more sensitive data. To start, it should support sanitizing JSON based CTI formats, and a configurable set of regex rules to detect sensitive data. Refining this app to support more formats and more sophisticated detection mechanisms is out of scope of this thesis.
 
 \section{Evaluation} % 0.5 Page
-Methodology and Metrics
-Test scenario
+% Methodology and Metrics
+% Test scenario
 
-- How to gather (CTI) data?
-- Metrics for evaluating the privacy? (e.g. entropy)
-- The steps of the scenario and the expected results
-- How to measure the performance?
+% - How to gather (CTI) data?
+% - Metrics for evaluating the privacy? (e.g. entropy)
+% - The steps of the scenario and the expected results
+% - How to measure the performance?
+
+My contribution being design of a sharing platform for CTI data, the evaluation should measure the effectiveness of the sharing platform. The problem is that according to my research, there is no benchmark available and no defined metrics to this aim. Having no baseline to compare against, it seems hard to reach an objective evaluation. Furthermore, many performance metrics depend on the implementation, infrastructure, and the details of the scenario. Since, my main contribution is the design of the platform, not the implementation, some metrics can be misleading. 
+
+However, several options can be thought of. First, by focusing on the main effect of using data spaces for data sharing, which is the addition of usage control and changing the data flow, one can define a few specific metrics. Having defined some usage case scenarios and a sample implementation, we can measure for example the following metrics: 
+\begin{itemize}
+    \item Number of unnecessary participants that should have access to the data.
+    \item The difficulty of changing the usage policies.
+    \item How difficult it is to revoke access to the data.
+    \item Variety of types of usage policies that are enforceable.
+    \item How many scenarios are significantly improved using our approach.
+\end{itemize}
+
+The above-mentioned items might be subjective and change by modifying the chosen scenarios, but investigating it can provide some insights into the effectiveness of the data spaces.
+
+Another approach which can sound more objective is to design a survey. It should use some standard templates to be comparable. The survey should be conducted on a group of experts in the field of CTI sharing after presenting them our approach. The survey should be designed to measure the effectiveness of our design in terms of privacy and security. Ideally, 10 to 20 experts should be interviewed. There is a risk of not having enough experts available. In that case, we fall back to the first approach.
 
 
 \section{Timeline / Milestones / Project Plan} % 0.75 Page

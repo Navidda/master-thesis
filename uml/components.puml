@@ -1,4 +1,4 @@
-@startuml component_diagram
+@startuml components
 ' skinparam componentStyle rectangle
 
 database "Data Source" as DB1 
