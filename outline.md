@@ -3,7 +3,7 @@ Provide a concise summary of your thesis proposal, including the research proble
 
 Introduction
 - Motivation: Explain why cyber threat intelligence sharing is important for smart grid security, and identify the key challenges and limitations that your research aims to address.
-- Goal: State the research question and objectives of your thesis, and explain how they relate to the broader research area of cyber security and smart grid technologies.
+- Goal: State the research question and objectives of your thesis, and explain how they relate to the broader research area of cybersecurity and smart grid technologies.
 - Outline: Provide an overview of the structure and content of your thesis proposal, and highlight the key sections and contributions.
 
 Background and Related Work
