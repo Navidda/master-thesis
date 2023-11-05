@@ -20,59 +20,116 @@
 
 \subsection{Motivation}
 
+% - Why is it important?
+% - High level description of the problem
+% - Real world
+% - CTI Sharing
+
 \subsection{Thesis Goal}
+
+% Towards CTI Data space.
+% Identify capabilities and limitations.
+% Define guidelines and provide recommendations.
 
 Towards a data sharing platform for "Cyber Threat Intelligence" information focused on the Smart Grid use case, that supports privacy and sovereignty of data to increase the security of smart electricity infrastructure.
 
 Investigate the potentials of data spaces in the context of CTI sharing and its limitations. Design of a data space for CTI sharing. Implementation of a prototype. Evaluation of the prototype.
 
 The suggested platform is referred to as Bazaar from here.
+
 \subsection{Outline}
 
+% Check the template for the outline
 
 \section{Background and Related Work} % 4 pages
 
 \subsection{Background}
-\subsubsection*{Smart Grid Security}
-A smart grid is an advanced electrical grid that uses advanced technologies to efficiently manage the generation, distribution, and consumption of electricity. Smart grid security involves protecting the system from cybersecurity threats that can disrupt or damage the grid's operations. It could be divided into three layers: physical security, network security, and data security. Physical security includes measures to protect the physical infrastructure of the grid, such as substations, transformers, and power lines. This can include fencing, security cameras, and access controls. Network security involves protecting the communication networks used by the smart grid. This can include implementing firewalls, intrusion detection systems, and encryption to prevent unauthorized access or attacks. Data security involves protecting the data generated and used by the smart grid, including customer data, operational data, and control data. This can include implementing access controls, data encryption, and backup and recovery systems to ensure the availability and integrity of the data. 
+
+\subsubsection{Cybersecurity}
+% TODO: Use references for Definitions
+
+Cybersecurity, the practice of protecting computer systems, networks, and data, encompasses crucial terms such as confidentiality, ensuring data privacy; integrity, maintaining data accuracy and trustworthiness; availability, assuring data and systems are accessible when needed; authentication, verifying user identities; authorization, granting appropriate access; firewall, filtering network traffic; malware, malicious software; phishing, deceptive attacks; and vulnerability, weaknesses in systems.
 
 
-Wallis et. al. \cite{wallis_ee-isacpractical_2022} mentions the following severe cyber threats for smart grids and the energy sector in general: data injection attacks on state estimation \cite{deng_false_2019}, distributed denial of service (DDoS) and denial of service (DoS) attacks \cite{wang_coordinated_2019}, targeted attacks, coordinated attacks, hybrid attacks, and advanced persistent threats [8,9]. Moreover, in recent years, ransomware campaigns have emerged as a significant risk to the sector [10-12].
+Relevant actors in the realm of cybersecurity include hackers who exploit vulnerabilities, security analysts responsible for defending systems, vendors who create security solutions, employees who can pose potential insider threats, government bodies serving as regulators and law enforcement, threat actors with malicious intent, and end users utilizing digital resources in the interconnected digital landscape.
+
+\subsubsection{Cyber Threat Intelligence}
+Cyber threat intelligence (CTI) is the process of collecting, analyzing, and disseminating information about potential or current cyber threats. CTI relies on gathering data from diverse sources, including security tools, threat feeds, honeypots, forums, social media platforms, and other relevant online and offline sources. This data can include indicators of compromise (IOCs), malware samples, network traffic logs, vulnerability information, and more. The goal is to provide organizations with a comprehensive understanding of potential cyber threats to make informed decisions. It helps identify the tactics, techniques, and procedures (TTPs) used by threat actors and vulnerabilities in an organization's security infrastructure. It is an important component of a comprehensive cybersecurity strategy to reduce the risk of a cyberattack. 
+
+% Threat Intelligence Program
+    % Threat Intelligence Cycle: Planning / Collection / Analysis / Production / Dissemination
+% Situational Awareness (SA)
+% TTPs
+% Threat Actors
+% Vulnerabilities
+% IOCs
+    % Malware
+% Incident Response (IR)
+    % Playbook
+% General Recommendations
+    % Risk mitigation strategies
 
 
+\subsubsection{Collaborative CTI}
 
-\subsubsection{Threat intelligence Sharing}
-Cyber threat intelligence (CTI) is the process of collecting, analyzing, and disseminating information about potential or current cyber threats. CTI relies on gathering data from diverse sources, including security tools, threat feeds, honeypots, forums, social media platforms, and other relevant online and offline sources. This data can include indicators of compromise (IOCs), malware samples, network traffic logs, vulnerability information, and more. The goal is to provide organizations with a comprehensive understanding of potential cyber threats to make informed decisions. It helps identify the tactics, techniques, and procedures (TTPs) used by threat actors and vulnerabilities in an organization's security infrastructure. It is an important component of a comprehensive cybersecurity strategy to reduce the risk of a cyberattack. Sharing cyber threat intelligence allows organizations to enhance their situational awareness, proactively defend against potential threats, and improve incident response capabilities. Through collaboration and information exchange between organizations, it leads to a more robust cybersecurity posture for the entire community.
+CTI can be collaborative, meaning it can involve multiple organizations with a common goal.
+By sharing CTI, stakeholders can gain a better understanding of the threat landscape and a wider situational awareness. 
+This can help them identify and proactively mitigate threats instead of reacting to them after they have occurred.
+Plus, security teams reduce their workload by not doing the same thing that has already been done by others. As a result, they can focus on investigating unknown threats. 
+Moreover, it is common for a threat actor to target multiple organizations using the same TTPs, because once an attack vector is successful, the attacker will try to exploit using it as much as possible, further increasing the benefits of CTI sharing.
+However, for an effective CTI sharing, CTI should be timely and actionable. 
+Constantly, the vulnerabilities get patched, malwares gets updated, and threat actors change their TTPs. Therefore, CTI should be shared in real-time to be most effective. 
+Furthermore, CTI should be actionable, meaning the receiving organization should be able to easily turn it into actions. Should it take a lot of effort to process the CTI, it will waste security team's resources.
+These points suggest the importance of automation in CTI sharing.
 
-There are several approaches and frameworks for sharing CTI, including commercial and non-commercial platforms. It could include government initiatives as well as open-source communities. Commercial platforms are typically managed by cybersecurity vendors that provide CTI feeds to their customers. Non-commercial platforms include collaborative initiatives among organizations, such as Information Sharing and Analysis Organizations (ISAOs) and Information Sharing and Analysis Centers (ISACs).
+There are existing frameworks and communities for CTI sharing. Information Sharing and Analysis Centers (ISACs) are one. These are non-profit organizations that help organizations in a specific sector, usually a critical national infrastructure, e.g. electricity, water, gas, health care, finance, etc., to share CTI with each other. 
 
-Despite the benefits of CTI sharing, there are also gaps and limitations that need to be addressed. These include concerns around privacy, legal and regulatory barriers, lack of trust among participants, and difficulties in sharing information in real-time. In addition, the lack of a standardized format for CTI sharing can make it challenging for organizations to share and use CTI effectively. As such, efforts to standardize CTI sharing formats and improve trust among participants are critical for improving the effectiveness of CTI sharing initiatives.
+Despite the benefits of CTI sharing, there are also gaps and limitations that need to be addressed. 
+These include concerns around market factors, legal and regulatory barriers, lack of trust among participants, and interoperability challenges.
+% Market
+Organizations fear that sharing CTI will expose their vulnerabilities and in turn cause negative publicity.
+% Legal and Liability
+Liability is another concern. Third party tools whose vulnerabilities are shared through CTI might sue the organization that shared the information. Personal data protection laws, such as GDPR, should be considered when sharing CTI.
+% Trust
+Many CTI sharing communities suffer from free-riding--where some organizations benefit from the shared CTI without contributing any CTI of their own. 
+Another concern is the risk of hackers gaining access to the CTI. 
+% Interoperability
+The lack of a standardized format for CTI is another challenge. Each organization uses its own chosen format to consume and manage CTI, therefore the CTI provider should produce CTI in many formats.
+% Effort and Benefit
+A CTI provider should consider all these challenges before sharing CTI, which might require a lot of resources and many skilled personnel costing the organization a lot of money.
+
+\subsubsection{EE-ISAC}
+An example ISAC would be
+European Energy Information Sharing and Analysis Center (EE-ISAC)
+which has acquired over 30 members from utilities, academia, governmental and non-governmental organizations since its foundation in 2015. Members exchange cyber threat information through plenary meetings, working groups, and a dedicated platform (based on MISP). The information exchange is based on a trust achieved by confidentiality agreements and regular physical meetings with the same members. 
+\cite{wallis_ee-isacpractical_2022}
+
 
 \subsubsection{Obligatory Sharing}
 
 The Directive on measures for a high common level of cybersecurity across the Union (the NIS2 Directive) provides legal measures to boost the overall level of cybersecurity in the EU. It ensures EU member states to have a national Computer Security Response Team (CSIRT) that cooperate with each other, and also a culture of information sharing between the public and private sectors in critical sectors. More specifically, organizations that are part of the critical sectors are required to share information about incidents happened to them with the national CSIRT.
 
-\subsubsection*{Data Modeling}
-In the context of CTI sharing, data modelling serves three purposes: (1) to provide a backbone for all relevant information, (2) to specify the data input format for further analysis, (3) to define the desired target for information gathering. \cite{husak_crusoe_2022}
+% \subsubsection{Data Modeling}
+% In the context of CTI sharing, data modelling serves three purposes: (1) to provide a backbone for all relevant information, (2) to specify the data input format for further analysis, (3) to define the desired target for information gathering. \cite{husak_crusoe_2022}
 
-Heterogeneous data formats from different incompatible security tools.
+\subsubsection{Data Sovereignty}
+By increasing the value of data in businesses and data becoming a commodity, protecting data using laws and regulations has become a necessity. Data sovereignty is concept that has arisen in this context. It refers to the right of the owner of the data to have control over their data. By default, if a party is processing data owned by another party, the processing party can technically do anything with the data. Data sovereignty tries to address this issue. One means of achieving data sovereignty is by using usage control. Usage control concerns with introducing and enforcing restrictions on what could (not) happen to the data. It is the generalized version of the traditional access control which only concerns with "who" rather than "how", "where", "why". The data owner defines the usage policies and the usage control mechanism enforces them. \cite{eitel_usage_2021}
 
-\subsubsection*{Data Spaces}
-The term data spaces term was first coined by Franklin et al to describe a new paradigm for data management \cite{franklin_databases_2005}. It solves some data integration tasks by offering a consolidated perspective of data residing in diverse origins, encompassing databases, files, and web services without physically transfer the data. He proposed a DataSpace Suppport Platform (DSSP) that helps developers by enabling them to query and manipulate the data from multiple sources using a single query language with the help of this unified view of data sources.
+\subsubsection{Data Spaces}
+The term data spaces term was first coined by Franklin et al. \cite{franklin_databases_2005} to describe a new abstraction in data management to solve the data integration problem that follows: An organization has interrelated data in diverse origins, encompassing databases, files with various formats, and web services. The task is to query or update the data.
+Franklin et al. proposed a DataSpace Suppport Platform (DSSP) that helps developers by providing a single query language based on a unified view of the data sources. This implies a pay-as-you-go approach where physically moving and transforming the data is done only by demand.
 
-Beside its technological definition, one could define data spaces from an economic point of view, where data spaces is a form of data exchange. In this viewpoint, dataspaces describes a situation where two or more organizations exchange data to gain a common benefit. \cite{reiberg_what_2022}
+The same concept applies when several organizations want to integrate their data or exchange it with others. In this context, the term data space would refer to the platform comprised of data sources in different organizations used for data exchange and integration which is defined by a set of standards and protocols that enable interoperability between them. \cite{reiberg_what_2022}
 
-However, there is not a single definition of data spaces. Dataspaces is a concept to fulfill several requirements. In different contexts, different requirements are more important than others. 
+Apart from data sharing and integration, data spaces can fulfill other requirements.
 
-Data sharing or integration is one requirement. Data spaces could be used to integrate data from different sources. It could also be viewed as a data exchange platform in some contexts.
+A crucial requirement, that makes data spaces interesting, is the sovereignty of data. Sovereignty can generally be defined as supreme authority. In the context of data, it denotes the right of the owner to control how and by whom will the data be used. Data spaces can fulfill this requirement by keeping the data in the data source and providing a unified view of the data to the consumers with respect to the access control policies defined by the owner of the data.
 
-Another crucial requirement, that makes data spaces interesting, is the sovereignty of data. Sovereignty can generally be defined as supreme authority. In the context of data, it denotes the right of the owner to control how and by whom will the data be used. Data spaces could fulfill this requirement by keeping the data in the data source and providing a unified view of the data to the consumers with respect to the access control policies defined by the owner of the data.
+Another requirement is governance of the data space. In order to facilitate the cooperation of different participants, a set of policies, rules and protocols should exist. To define them, a governance body is commonly expected to exist. \cite{reiberg_what_2022}
 
-Another aspect of data spaces is its governance. It is required to define a set of policies, rules and protocols to ensure a smooth exchange of data. Therefore, a governance body is expected to be established to define and enforce these policies. \cite{reiberg_what_2022}
+Data spaces should be open, meaning anyone complying with the policies should be able to join without restriction. This encourages a fair and non-monopolistic market. This entails an easy access, which means, anyone should be able to connect with a limited effort.
 
-Data spaces should be open, meaning anyone complying with the policies should be able to join without restriction. This encourages a fair and non-monopolistic market. This entails an easy access, which means, anyone could be able to connect with a limited effort.
-
-Data spaces are usually designed to be decentralized and federated. Meaning there is no entity having direct control over all data exchanges. Different participants could interact with each other directly. This emphasizes the role of interoperability. This is only possible when certain open standards are established. Consequently, data spaces complying to the same standards could be embedded inside each other enabling cross-data-space exchange \cite{reiberg_what_2022}.
+Data spaces are usually designed to be decentralized and federated, meaning, there is no entity having direct control over all data exchanges. Different participants can interact with each other directly. This emphasizes the role of interoperability. This is only possible when certain open standards are established. Consequently, data spaces complying to the same standards can be embedded inside each other enabling cross-data-space exchange \cite{reiberg_what_2022}.
 
 \noindent\fbox{%
     \parbox{\textwidth}{%
@@ -80,72 +137,80 @@ Data spaces are usually designed to be decentralized and federated. Meaning ther
     }%
 }
 
+\subsubsection{Smart Grid Security}
+
+% TODO: Improve using the new review paper
+
+A smart grid is an advanced electrical grid that uses advanced technologies to efficiently manage the generation, distribution, and consumption of electricity. Smart grid security involves protecting the system from cybersecurity threats that can disrupt or damage the grid's operations. It can be divided into three layers: physical security, network security, and data security. Physical security includes measures to protect the physical infrastructure of the grid, such as substations, transformers, and power lines. This can include fencing, security cameras, and access controls. Network security involves protecting the communication networks used by the smart grid. This can include implementing firewalls, intrusion detection systems, and encryption to prevent unauthorized access or attacks. Data security involves protecting the data generated and used by the smart grid, including customer data, operational data, and control data. This can include implementing access controls, data encryption, and backup and recovery systems to ensure the availability and integrity of the data. 
+
+Wallis et al. \cite{wallis_ee-isacpractical_2022} mentions the following severe cyber threats for smart grids and the energy sector in general: data injection attacks on state estimation \cite{deng_false_2019}, distributed denial of service (DDoS) and denial of service (DoS) attacks \cite{wang_coordinated_2019}, targeted attacks, coordinated attacks, hybrid attacks, and advanced persistent threats \cite{leszczyna_cybersecurity_2019}. Moreover, in recent years, ransomware campaigns have emerged as a significant risk to the sector \cite{keshavarzi_i2ce3_2020}.
+
 \subsection{Related Work}
 
-\subsubsection*{EE-ISAC}
-European Energy Information Sharing and Analysis Centre (EE-ISAC) is a non-profit organization that facilitates the exchange of cyber threat information between its members. Since its foundation in 2015 it acquired over 30 members from utilities, academia, governmental and non-governmental organizations. Members exchange cyber threat information through plenary meetings, working groups, and a dedicated platform (based on MISP). EE-ISAC facilitates trust based information exchange which is not present in the mandatory information sharing in the NIS directive. This trust is achieved by confidentiality agreements and regular physical meetings with the same members. 
-\cite{wallis_ee-isacpractical_2022}
+In this section, we will review some existing solutions related to our problem. 
 
-\subsubsection*{IDS}
+\subsubsection{Current Dataspace Initiatives}
+There are several initiatives that are working to create a standard for data spaces. The most prominent ones are International Data Spaces (IDS) and Gaia-X. In this section, we will review these two initiatives and compare them.
+
+\subsubsection*{IDSA}
+
 The International Data Spaces (IDS) is an initiative with the goal of creating a standard for a distributed software architecture for data exchange with sovereignty. It was launched in 2015 as a Fraunhofer research project funded by the German Federal Ministry for Education and Research \cite{otto_evolution_2022}. Shortly after that, in 2016, the IDS Association (IDSA) was founded as a non-profit organization to continue the research. It resulted in definition of the IDS Reference Architecture Model (IDS RAM). The IDS RAM is the description of IDS components and their interactions without being technology specific \cite{otto_evolution_2022}. IDS RAM allows anyone to implement the IDS compliant components using any technology. The IDSA also provides a reference implementation of different IDS components called IDS Testbed \cite{noauthor_ids_2022}. 
 
-IDS RAM defines the following components \cite{pettenpohl_international_2022}:
-- Connector: The connector is the interface between the IDS ecosystem and the data source. It is responsible for the data exchange and the enforcement of the usage control policies as well as authentication.
-- Identity Provider: authentication service managing identity information
-- IDS Broker: Manages the metadata (description and usage policies)
-- Clearing House: Audits the data exchange and manages the payment
-- IDS Apps: Process the exchanged data. Deployed within Connector.
-- App Store: Provides IDS apps
-- Vocabulary Provider: Offers vocabularies to describe and annotate data
-
-Furthermore, the participants could undertake different roles \cite{pettenpohl_international_2022}:
-- Data Owner: Controls the data and defines usage policies and payment model.
-- Data Provider: Provides the data to the IDS ecosystem with respect to the policies defined by the data owner.
-- Data Consumer: Same as data provider but consumes the data.
-- Data User: Same as data owner but uses the data.
-- App Provider
-- ...
-
-
-Usage Control:
-
-Certification:
-
+IDS RAM defines the following components:
+Connector, Identity Provider, IDS Broker, Clearing House, IDS Apps, App Store, Vocabulary Provider \cite{pettenpohl_international_2022}.
+% \begin{itemize}
+%     \item Connector: The connector is the interface between the IDS ecosystem and the data source. It is responsible for the data exchange and the enforcement of the usage control policies as well as authentication.
+%     \item Identity Provider: authentication service managing identity information
+%     \item IDS Broker: Manages the metadata (description and usage policies)
+%     \item Clearing House: Audits the data exchange and manages the payment
+%     \item IDS Apps: Process the exchanged data. Deployed within Connector.
+%     \item App Store: Provides IDS apps
+%     \item Vocabulary Provider: Offers vocabularies to describe and annotate data
+% \end{itemize}
+Furthermore, it conceptualizes the following roles for the participants:
+Data Owner, Data Provider, Data Consumer, Data User, App Provider
+\cite{pettenpohl_international_2022}.
+% \begin{itemize}
+%     \item Data Owner: Controls the data and defines usage policies and payment model.
+%     \item Data Provider: Provides the data to the IDS ecosystem with respect to the policies defined by the data owner.
+%     \item Data Consumer: Same as data provider but consumes the data.
+%     \item Data User: Same as data owner but uses the data.
+%     \item App Provider
+%     \item ...
+% \end{itemize}
+% Usage Control:
+Also, it defines the standards and procedures to ensure data sovereignty. It uses usage control to enforce the usage policies defined by the data owner. It uses the following components to do so: Usage Control Policy Management Point (UC PMP), Usage Control Policy Decision Point (UC PDP), Usage Control Policy Enforcement Point (UC PEP) \cite{otto_evolution_2022}.
+The policies are defined in a machine-readable format which is an extension of the Open Digital Rights Language (ODRL) \cite{eitel_usage_2021}. These policies should be mapped to a specific policy language supported by the tool that enforces them. IDSA RAM mentions the following policy enforcement tools: MYDATA, LUCON, D°. 
+% Certification:
+% TODO: Add more details about the certification process
 
 
 \subsubsection*{Gaia-X}
-European data strategy Towards a single market of data. + technological independence of Europe. No vendor lock-in. Launched in 2019. Sovereign digital ecosystem
-Gaia-X is an initiative that aims to foster generation of a data and service infrastructure by developing regulations and technical specifications which is based on European values, applicable to any existing cloud and edge technology stack. Gaia-X allows for transparency, controllability, portability and interoperability across data and services. It will ease value creation through data collection and sharing between organizations leading to a vibrant data ecosystem across Europe and beyond. Gaia-X Association deliverables include federation services, common policy rules and an architecture of standards. (Data sovereignty?) Federation services could be utilized by the ecosystem participants to achieve a global interoperability, compliance and effortless set up. This includes, "Identity and Trust", "Federated Catalog" and "Data Exchange services". \cite{otto_role_2022}
-AISBL: Gaia-X Association
-Nodes, Services (Any cloud service), Service Instances (A service running on a node) and Data Assets (a data set on a node)
-Participants: Organizations and individuals that are part of the Gaia-X ecosystem
-Clearing House: Middle man in the exchange checking for compliance
+
+Gaia-X is an initiative, launched in 2019, that aims to foster creation of an infrastructure that allows for free and easy exchange of data and services between organizations and evade the vendor lock-in imposed by current proprietary cloud and service providers. To do so, regulations and technical specifications that are based on European values, applicable to any existing cloud and edge technology stack are going to be defined. The goal is to bring transparency, controllability, portability and interoperability across data and services. By facilitating data collection and sharing between organizations, a vibrant data ecosystem across Europe and beyond could evolve. Gaia-X Association deliverables include federation services, common policy rules and an architecture of standards. Federation services can be utilized by the ecosystem participants to achieve a global interoperability, compliance and effortless set up. This includes, “Identity and Trust”, “Federated Catalog” and “Data Exchange services”. \cite{otto_role_2022}
+% AISBL: Gaia-X Association
+% Nodes, Services (Any cloud service), Service Instances (A service running on a node) and Data Assets (a data set on a node)
+% Participants: Organizations and individuals that are part of the Gaia-X ecosystem
+% Clearing House: Middle man in the exchange checking for compliance
 
 \subsubsection*{Comparison of IDS and Gaia-X}
-Gaia X 2019, IDS 2015. IDS is more mature. it is already tested in the industry. Gaia X is still in the development phase.
-Gaia X offers a more holistic approach including cloud elements.
-Gaia X is more focused on cloud services. IDS is more focused on data exchange.
-Gaia X is more focused on the business and economic side. IDS is more focused on the technical side.
-Gaia-X could use IDS as a component \cite{otto_role_2022}
-Gaia-X provides standards for infrastructures and cloud elements. IDS provides standards for data exchange.
-Federated Catalog ~ IDS Broker + Vocabulary Provider + Information Model
-Identity and Trust ~ IDS Identity Provider + Dynamic Attribute Provisioning Service (DAPS)
-Gaia X Sovereign Data Exchange ~ IDS Usage Control and Clearing House
-Gaia X Node ~ IDS Connector
 
-- Documentation: 
-- Maturity: Gaia-X is still in the development phase. IDS is more mature.
-- Implementation: IDS is open source and has a reference implementation. Gaia-X is not open source and does not have a reference implementation.
+% Mapping of Gaia-X to IDS
+    % Federated Catalog ~ IDS Broker + Vocabulary Provider + Information Model
+    % Identity and Trust ~ IDS Identity Provider + Dynamic Attribute Provisioning Service (DAPS)
+    % Gaia X Sovereign Data Exchange ~ IDS Usage Control and Clearing House
+    % Gaia X Node ~ IDS Connector
 
+%  Why choose IDSA? 
+    % Maturity
+    % Open source Reference Implementation
+    % Big picture cloud vs. data exchange
 
+In comparison to IDSA, Gaia-X is less mature and still in the development phase whereas IDSA is used in the industry. It focuses on cloud infrastructures and businesses operating within EU, in contrast to IDSA which is more on the technicalities of the sovereign data exchange. Finally, Gaia-X can use IDSA in the data exchange layer \cite{otto_prof_dr_boris_gaia-x_2021}. 
 
-\subsubsection*{Other Platforms}
-Platform Industrie 4.0, 
-SWIPO: is an association that develops and safeguards codes of conduct to facilitate Switching and Porting of non-personal data between cloud providers and their customers.
-It follows the Free Flow of Non-Personal Data regulation.
-
-\subsubsection*{Crowd Sourced Sharing}
-The sharing is caring paper \cite{jesus_sharing_2023}
+\subsubsection*{Open Source CTI sharing}
+CTI sharing models can be 
+Jesus et al. \cite{jesus_sharing_2023} defined a framework for open source CTI sharing. 
 
 % ---------------------------------------------------------------
 
@@ -169,13 +234,13 @@ The sharing is caring paper \cite{jesus_sharing_2023}
 In this section, we will describe the use case and the requirements of the proposed platform. We will also discuss the constraints and limitations of the platform.
 
 \subsection{Overview}
-Bazaar can be utilized in several areas. To generalize, any set of organizations that work together to achieve a common goal who fundamentally use IT systems in their operations could benefit from Bazaar. Bazaar can accelerate the process of establishing new sector ISACs and facilitate the activities of existing ones. 
+Bazaar can be utilized in several areas. To generalize, any set of organizations that work together to achieve a common goal who fundamentally use IT systems in their operations can benefit from Bazaar. Bazaar can accelerate the process of establishing new sector ISACs and facilitate the activities of existing ones. 
 As mentioned in the \ref{sec:motivation}, ISACs' common use cases are critical infrastructures, including, electricity, water, finance, transportation, and healthcare.
 
 To elicit some concrete scenarios where Bazaar can be used, we should narrow our focus on a specific use case. In this work, we will focus on the smart grid use case. Consider a situation where there are several participants representing different organizations active in the energy supply chain. 
 The threat landscape they are exposed to is similar, because they are targeted by similar adversaries, and by using same technologies, they share the same vulnerabilities. Therefore, they can benefit from sharing CTI with each other.
 
-A possible threat actor could be an advanced persistent threat (APT) supported by an enemy government, or a gang of experienced cyber criminals intended to disrupt the energy supply by attacking different actors in the supply chain. By doing so, they can reach their goal of causing a blackout, exfiltrating sensitive information, or gaining financial benefits (e.g. ransomware). To this end, they probably use some limited set of tactics, techniques, and procedures (TTP) to attack their victims over and over again. As a result, sharing these TTPs among the participants can help them to be better prepared against these attacks.
+A possible threat actor can be an advanced persistent threat (APT) supported by an enemy government, or a gang of experienced cyber criminals intended to disrupt the energy supply by attacking different actors in the supply chain. By doing so, they can reach their goal of causing a blackout, exfiltrating sensitive information, or gaining financial benefits (e.g. ransomware). To this end, they probably use some limited set of tactics, techniques, and procedures (TTP) to attack their victims over and over again. As a result, sharing these TTPs among the participants can help them to be better prepared against these attacks.
 
 Moreover, the participants in the energy sector are required to share information about incidents happened to them with each other and with the national CSIRT. This is required by the NIS2 directive. Therefore, they can use Bazaar to share the required information with each other.
 
@@ -197,6 +262,9 @@ A use case diagram is shown in figure \ref{fig:use-case}.
 
 
 \subsection{Scenarios}
+
+% Not needed to define use case scenarios using formal templates
+% Current level of detail is enough
 
 \subsubsection{Scenario 1: Peer to Peer Sharing}
 A utility provider (Acme) has found a new malware in their network. They share the related IOC inside Bazaar. However, they set the usage policy to only allow the data to be processed in the Bazaar Connectors located within the EU (to comply with GDPR). They also set the usage policy to only allow the data to be read by the participants that have a certain minimum level on a certain trust metric. Furthermore, Acme does not want to share with competing companies. Therefore, it blacklists identified participants that compete in the same market.
@@ -230,9 +298,9 @@ At this point, B should be able to connect to the platform. It should be able to
 
 \section{Conceptual Approach} % 1.5 Pages
 
-Components and relation to requirements
-Discuss Benefits and limitations
-Compare with existing solutions
+% Components and relation to requirements
+% Discuss Benefits and limitations
+% Compare with existing solutions
 
 \begin{figure}[h]
     \centering
