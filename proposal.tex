@@ -149,13 +149,14 @@ Wallis et al. \cite{wallis_ee-isacpractical_2022} mentions the following severe 
 
 In this section, we will review some existing solutions related to our problem. 
 
-\subsubsection{Current Dataspace Initiatives}
+\subsubsection{Current Data Space Initiatives}
 There are several initiatives that are working to create a standard for data spaces. The most prominent ones are International Data Spaces (IDS) and Gaia-X. In this section, we will review these two initiatives and compare them.
 
-\subsubsection*{IDSA}
+\paragraph{IDSA}
 
 The International Data Spaces (IDS) is an initiative with the goal of creating a standard for a distributed software architecture for data exchange with sovereignty. It was launched in 2015 as a Fraunhofer research project funded by the German Federal Ministry for Education and Research \cite{otto_evolution_2022}. Shortly after that, in 2016, the IDS Association (IDSA) was founded as a non-profit organization to continue the research. It resulted in definition of the IDS Reference Architecture Model (IDS RAM). The IDS RAM is the description of IDS components and their interactions without being technology specific \cite{otto_evolution_2022}. IDS RAM allows anyone to implement the IDS compliant components using any technology. The IDSA also provides a reference implementation of different IDS components called IDS Testbed \cite{noauthor_ids_2022}. 
 
+\subparagraph{IDS RAM}
 IDS RAM defines the following components:
 Connector, Identity Provider, IDS Broker, Clearing House, IDS Apps, App Store, Vocabulary Provider \cite{pettenpohl_international_2022}.
 % \begin{itemize}
@@ -185,7 +186,7 @@ The policies are defined in a machine-readable format which is an extension of t
 % TODO: Add more details about the certification process
 
 
-\subsubsection*{Gaia-X}
+\paragraph{Gaia-X}
 
 Gaia-X is an initiative, launched in 2019, that aims to foster creation of an infrastructure that allows for free and easy exchange of data and services between organizations and evade the vendor lock-in imposed by current proprietary cloud and service providers. To do so, regulations and technical specifications that are based on European values, applicable to any existing cloud and edge technology stack are going to be defined. The goal is to bring transparency, controllability, portability and interoperability across data and services. By facilitating data collection and sharing between organizations, a vibrant data ecosystem across Europe and beyond could evolve. Gaia-X Association deliverables include federation services, common policy rules and an architecture of standards. Federation services can be utilized by the ecosystem participants to achieve a global interoperability, compliance and effortless set up. This includes, “Identity and Trust”, “Federated Catalog” and “Data Exchange services”. \cite{otto_role_2022}
 % AISBL: Gaia-X Association
@@ -193,7 +194,7 @@ Gaia-X is an initiative, launched in 2019, that aims to foster creation of an in
 % Participants: Organizations and individuals that are part of the Gaia-X ecosystem
 % Clearing House: Middle man in the exchange checking for compliance
 
-\subsubsection*{Comparison of IDS and Gaia-X}
+\paragraph{Comparison of IDS and Gaia-X}
 
 % Mapping of Gaia-X to IDS
     % Federated Catalog ~ IDS Broker + Vocabulary Provider + Information Model
@@ -208,9 +209,20 @@ Gaia-X is an initiative, launched in 2019, that aims to foster creation of an in
 
 In comparison to IDSA, Gaia-X is less mature and still in the development phase whereas IDSA is used in the industry. It focuses on cloud infrastructures and businesses operating within EU, in contrast to IDSA which is more on the technicalities of the sovereign data exchange. Finally, Gaia-X can use IDSA in the data exchange layer \cite{otto_prof_dr_boris_gaia-x_2021}. 
 
-\subsubsection*{Open Source CTI sharing}
-CTI sharing models can be 
-Jesus et al. \cite{jesus_sharing_2023} defined a framework for open source CTI sharing. 
+\subsubsection{Open Source CTI sharing}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{sharing_models}
+    \caption{CTI Sharing Models}
+    \label{fig:sharing-models}
+\end{figure}
+
+CTI sharing can be either peer-to-peer, peer-to-hub (i.e. Repository), or a combination of the two (Figure \ref{fig:sharing-models}). Traditional exchange of CTI between two organizations is an example of a peer-to-peer sharing. In the peer-to-hub, a hub or repository is used to collect and distribute data. If the repository is openly accessible to anyone, it is called open source CTI sharing. Jesus et al. \cite{jesus_sharing_2023} investigated the state of the art of the open source CTI sharing. They found the barriers that have prevented the formation of any widely used open source CTI platform. 
+The barriers mentioned are 1) Legal and regulatory (e.g. GDPR or intellectual property) 2) Interoperability (e.g. different formats) 3) Usefulness and return 4) Market factors (e.g. losing reputation, free-riding) 5) Trust in peers and adversarial usage 6) Confidentiality risks.
+
+After studying these barriers, as well as some technical gaps, they do a confidentiality and privacy analysis of sharing a large sample data set of CTI, and they make the claim that it is possible to manage risks of sharing using simple techniques like sanitization. Finally, they propose a set of requirements and a reference architecture for an open source CTI sharing platform. 
+
 
 % ---------------------------------------------------------------
 
