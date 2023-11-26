@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass[draft]{article}
 \usepackage{graphicx} % Required for inserting images
 \usepackage{url}
 \usepackage{tikz}
@@ -202,7 +202,7 @@ Data spaces should be open, meaning anyone complying with the policies should be
 Data spaces are usually designed to be decentralized and federated, meaning, there is no entity having direct control over all data exchanges. Different participants can interact with each other directly. This emphasizes the role of interoperability. This is only possible when certain open standards are established. Consequently, data spaces complying to the same standards can be embedded inside each other enabling cross-data-space exchange \cite{reiberg_what_2022}.
 
 \noindent\fbox{%
-    \parbox{\textwidth}{%
+    \parbox{0.95\textwidth}{%
     "Data Spaces are defined as: A federated, open infrastructure for sovereign data sharing, based on common policies, rules and standards." \cite{reiberg_what_2022}
     }%
 }
@@ -233,7 +233,7 @@ Our contribution can be seen as an extension to standard sharing platforms (e.g.
 
 \subsection{Open Source CTI sharing}
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{sharing_models}
     \caption{CTI Sharing Models}
@@ -251,7 +251,7 @@ There are several initiatives that are working to create a standard for data spa
 
 \paragraph{IDSA}
 
-The International Data Spaces (IDS) is an initiative with the goal of creating a standard for a distributed software architecture for data exchange with sovereignty. It was launched in 2015 as a Fraunhofer research project funded by the German Federal Ministry for Education and Research \cite{otto_evolution_2022}. Shortly after that, in 2016, the IDS Association (IDSA) was founded as a non-profit organization to continue the research. It resulted in definition of the IDS Reference Architecture Model (IDS RAM). The IDS RAM is the description of IDS components and their interactions without being technology specific \cite{otto_evolution_2022}. IDS RAM allows anyone to implement the IDS compliant components using any technology. The IDSA also provides a reference implementation of different IDS components called IDS Testbed \footnote{https://internationaldataspaces.org/offers/reference-testbed/}. 
+The International Data Spaces (IDS) is an initiative with the goal of creating a standard for a distributed software architecture for data exchange with sovereignty. It was launched in 2015 as a Fraunhofer research project funded by the German Federal Ministry for Education and Research \cite{otto_evolution_2022}. In 2016, the IDS Association (IDSA) was founded as a non-profit organization to continue the research. It resulted in definition of the IDS Reference Architecture Model (IDS RAM). The IDS RAM is the description of IDS components and their interactions without being technology specific \cite{otto_evolution_2022}. IDS RAM allows anyone to implement the IDS compliant components using any technology. The IDSA also provides a reference implementation of different IDS components called IDS Testbed \footnote{https://internationaldataspaces.org/offers/reference-testbed/}. 
 
 \subparagraph{IDS RAM}
 IDS RAM defines the following components:
@@ -353,7 +353,7 @@ As a result, we are dealing with heterogeneous organizations and different level
 A use case diagram is shown in figure \ref{fig:use-case}.
 
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{use_case}
     \caption{Use Case Diagram}
@@ -381,7 +381,7 @@ Another organization (Organization B) after having heard of the platform finds i
 First, a committee of decision-making community members should accept the request. Then, after technical certification by the platform admins, B is allowed to join. 
 At this point, B should be able to connect to the platform. It should be able to search for available data assets, and fetch metadata. It should explore the existing members and their reputation.
 
-\subsetion{Requirements}
+\subsection{Requirements}
 
 
 % Stake-holders (Actors) and their profile
@@ -403,7 +403,7 @@ At this point, B should be able to connect to the platform. It should be able to
 % Discuss Benefits and limitations
 % Compare with existing solutions
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{components}
     \caption{System Architecture Diagram}
@@ -454,9 +454,9 @@ The overview of different conenctors is shown in table \ref{tab:connectors}.
 \begin{table}[ht]
     \label{tab:connectors}
     \centering
-    \begin{tabular}{| c c c c c c|}
+    \begin{tabular}{|c c c c c c|}
     \hline
-    \textbf{Name} & \textbf{Created} & \textbf{Stars} & \textbf{Commits} & \textbf{Last Release} & \textbf{Hosted} \\
+    \textbf{Name} & \textbf{Created} & \textbf{Stars} & \textbf{Commits} & \textbf{Released} & \textbf{Hosted} \\
     \hline
     \hline
     DSC & 07.10.2020 & 27[+101] & 2600 & 10.22 & \href{https://github.com/International-Data-Spaces-Association/DataspaceConnector}{Github} \\
@@ -480,7 +480,7 @@ Most number of stars and most recent release being a deciding factor, I will cho
 \subsection*{IDS Testbed}
 The IDS association defines Minimum Viable Data Space (MVDS) as the minimum set of components that provide the ability to do secure and sovereign data exchange. They specify the required components as follows: Two Connectors (a data provider and a consumer), an Identity Provider (Dynamic Attribute Provisioning Service, Certificate Authority). IDSA has published an open-source project, \href{https://github.com/International-Data-Spaces-Association/IDS-testbed}{IDS Testbed}, that contains instructions to install and orchestrate these set of minimum components. It references open-source implementations of these components, see table \ref{tab:components} to find source code of these components.
 
-\begin{table}[h]
+\begin{table}[ht]
     \label{tab:components}
     \centering
     \begin{tabular}{|c|c|c|c|}
@@ -509,7 +509,7 @@ For the App Store there is a published project (\href{https://github.com/Interna
 \subsection*{Usage Policies}
 To describe usage policies IDS defines its own Usage Control Language which is an extension of Open Digital Rights Language (ODRL). It is a machine readable format which is technology agnostic. There are multiple mechanism to enforce these policies automatically. The position paper on IDS Usage Control \cite{eitel_usage_2021} lists the following mechanisms: MYDATA Control Technologies, Logic based Usage Control (LUCON), and Degree (D°). According to the paper, MYDATA Control Technologies is the most mature and comprehensive. It is also the only one that is implemented in the IDS Testbed. Therefore, I will use MYDATA Control Technologies to enforce the usage policies. The usage control is enforced in the IDS Connector possibly using a separate application container. It comprises three different components: PMP, manages policies and creating them based on some templates, PDP, evaluates the policies and decides whether to allow or deny the request, and PEP, enforces the decision made by PDP. The overview of the components is shown in figure \ref{fig:connector}.
 
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=\textwidth]{connector}
     \caption{Connector Overview}
