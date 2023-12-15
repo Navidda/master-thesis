@@ -218,7 +218,7 @@ There are several initiatives that are working to create a standard for Dataspac
 The International Dataspaces (IDS) is an initiative with the goal of creating a standard for a distributed software architecture for data exchange with sovereignty. It was launched in 2015 as a Fraunhofer research project funded by the German Federal Ministry for Education and Research \cite{otto_evolution_2022}. In 2016, the IDS Association (IDSA) was founded as a non-profit organization to continue the research. It resulted in definition of the IDS Reference Architecture Model (IDS RAM). The IDS RAM is the description of IDS components and their interactions without being technology specific \cite{otto_evolution_2022}. IDS RAM allows anyone to implement the IDS compliant components using any technology. The IDSA also provides a reference implementation of different IDS components called IDS Testbed \footnote{https://internationaldataspaces.org/offers/reference-testbed/}. 
 
 \subparagraph{IDS RAM}
-IDS RAM defines the following components:
+IDS RAM defines the following components \cite{otto_ids_2019}:
 Connector, Identity Provider, IDS Broker, Clearing House, IDS Apps, App Store, Vocabulary Provider \cite{pettenpohl_international_2022}.
 % \begin{itemize}
 %     \item Connector: The connector is the interface between the IDS ecosystem and the data source. It is responsible for the data exchange and the enforcement of the usage control policies as well as authentication.
@@ -300,7 +300,9 @@ However, these data spaces lack the data sovereignty and usage control features 
 % - Trust and reputation
 
 % Some intro about this section
-In this section, we will describe the use case and the requirements of the proposed platform. We will also discuss the constraints and limitations of the platform. A platform for sharing threat information could be useful for any set of organizations that work together to achieve a common goal who fundamentally use IT systems in their operations. A good platform facilitate creation and operation of sharing communities. Example communities are sector specific ISACs such as ISACs for critical infrastructures, including, energy, water, finance, transportation, and healthcare. In order find concrete requirements, we need to narrow our focus to a specific use case. In this work, we will focus on the energy sector, and more specifically the cyber security of the smart grids.
+In this section, we will describe the use case and the requirements of the proposed platform. 
+% We will also discuss the constraints and limitations of the platform. 
+A platform for sharing threat information could be useful for any set of organizations that work together to achieve a common goal who fundamentally use IT systems in their operations. A good platform facilitate creation and operation of sharing communities. Example communities are sector specific ISACs such as ISACs for critical infrastructures, including, energy, water, finance, transportation, and healthcare. In order find concrete requirements, we need to narrow our focus to a specific use case. In this work, we will focus on the energy sector, and more specifically the cyber security of the smart grids.
 
 
 \subsection{Cyber Security in the Energy Sector}
@@ -367,32 +369,50 @@ A security organization specialized in selling CTI feeds, wants to use the platf
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\textwidth]{components}
+    \includegraphics[width=\textwidth]{conceptual_approach.png}
     \caption{System Architecture Diagram}
     \label{fig:system-architecture}
 \end{figure}
 
-Important dataspace components that are relevant to our use case are listed below. The descriptions fully conform to the IDSA RAM 4.0 \cite{otto_ids_2019}.
-\begin{itemize}
-    \item Connector: It is the primary component involved in the data exchange acting either as data provider or consumer. Not only it performs the actual data exchange but also the enforcement of the usage control policies as well as authentication. It can be operated on-premises or in a cloud environment. It will run the IDS Apps that do process the data among other things (more on that later). It uses application container management technology to isolate data apps and core functionalities.
-    \item IDS Broker: The IDS Metadata Broker is an IDS Connector, which contains an endpoint for the registration, publication, maintenance, and query of Self-Descriptions. Self-Descriptions encapsulate information about Connectors, their managing participant, the offered data assets, and the respective usage conditions. In a sense, the IDS Broker is like a phonebook.
-    \item Identity Provider: This is the component serving as Identity and Access Management (IAM). It's responsible for assigning identities to participants, verifying identity claims and granting access based on identities. It comprises three components: 
-        \begin{itemize}
-            \item CAs: One or multiple certificate authorities are responsible for issuing certificates to participants upon request. They are also responsible for revoking certificates. They are the trust anchors by which all other components can be verified.
-            \item Dynamic Attribute Provisioning Service (DAPS): It complements the certificates issued by CAs with more volatile attributes in form of tokens. Connectors can request Dynamic Attribute Tokens (DATs) from DAPS to prove their attributes to other components.
-            \item Participant Information Service (ParIS):  It provides business-related information about participants in the IDS that have been checked by the Support Organization. Similar to the way Broker provides metadata about data assets, ParIS provides metadata about participants.
-        \end{itemize}
-    \item Clearing House: It is a trusted third party in the data exchange that logs all the required information about clearing, billing, and usage control. It keeps track of the payment information and also usage information to help verify the compliance with the usage policies.
-    \item IDS Apps: These are re-usable software components that can be deployed inside the IDS Connector. They are mainly used to transform or analyze data. However, they can also be used to connect to enterprise services, or to allow the connector to be controlled by external systems. Data apps can be chained and bundled.
-    \item App Store: As the name suggests, it is a marketplace for IDS Apps. It contains endpoints to publish, search, and download IDS Apps. It is a Connector on its own, so it should pass the IDS certification criteria and provide a self-description.
-    \item Vocabulary Provider: To facilitate cooperation of different IDS components, a common vocabulary is required. The vocabulary provider enables the participants to define and publish their own vocabularies. Vocabularies typically follow the RDF standard. An example usage is to reference an RDF URI in the Self-Description of a data asset.
-\end{itemize}
+To support the use case scenarios mentioned, we are going to design and implement a sharing platform based on dataspaces for cyber threat intelligence. A high level diagram is depicted in figure \ref*{fig:system-architecture}. We used a color coding in the diagram: green components are the main contributions of this work. Yellow, are the components that we use or adjust to have a functional prototype. And white components are mentioned in the diagram to show the context, but we are not going to implement them.
 
-Apart from the components described by the IDS RAM, there are other components that are not part of the IDS RAM but are relevant to our use case. These components are described below.
+\subsection{Dataspace Connector}
+We have to set up a functional dataspace to create the backbone of the platform to support sovereign data exchange. It has the ability to handle publishing data offers, secure data exchange, contract negotiation, and enforcing usage policies. Therefore, a dataspace connector component is necessary.
 
-\begin{itemize}
-    \item Sanitization App: This is an IDS App that is responsible for sanitizing the data. It is deployed inside the IDS Connector. It is responsible for removing the sensitive information from the data before it is shared with other participants. IDS App is suitable for this task because dealing with sensitive data requires a high level of trust. Apps are certified and verified by the App Store. Furthermore, they are executed within the Connector, so they have access to the data before it is shared with other participants. This is important because it prevents the data from being leaked before it is sanitized. 
-\end{itemize}
+\subsection{Data Modelling}
+We need to create data models to be used in the platform. The data models should cover the identified requirements. We expect that we need data models in three different areas:
+
+\paragraph{Usage Policies:} We will specify the formats and data models to express the usage policies based on our requirements, such as prevent access outside EU, or allow only certain fields to be read.
+
+\paragraph*{CTI:} Here we focus on the threat intelligence data that is going to be exchanged. How it will be modeled, using which standard formats, or whether define a new abstract format to support many of existing ones.
+
+\paragraph*{Data Discovery and Negotiation:} Here we should answer the following questions: How one should find published data offers? How to express the search query? After selecting the data, how the negotiation of the contract takes place?
+
+\subsection{Integration with TIP} The sharing platform is only useful when it is integrated to existing tool and platforms for threat intelligence. We should find how data can be extracted from existing threat databases and how the received data could be integrated in the TIP in the data consumer side.
+
+\subsection{Sharing Panel} The direct users of the platform might not be programmers, so a graphical user interface is helpful. It should support the different usage scenarios of the platform, such as searching for offers, negotiation of contracts, specifying usage policies, and uploading the data to the dataspace.
+
+% Important dataspace components that are relevant to our use case are listed below.
+% \paragraph*{Connector:} It is the primary component involved in the data exchange acting either as data provider or consumer. Not only it performs the actual data exchange but also the enforcement of the usage control policies as well as authentication. It can be operated on-premises or in a cloud environment. It will run the IDS Apps that do process the data among other things (more on that later). It uses application container management technology to isolate data apps and core functionalities.
+% \paragraph*{Broker:} The IDS Metadata Broker is an IDS Connector, which contains an endpoint for the registration, publication, maintenance, and query of Self-Descriptions. Self-Descriptions encapsulate information about Connectors, their managing participant, the offered data assets, and the respective usage conditions. In a sense, the IDS Broker is like a phonebook.
+% \paragraph{Clearing House:} It is a trusted third party in the data exchange that logs all the required information about clearing, billing, and usage control. It keeps track of the payment information and also usage information to help verify the compliance with the usage policies.
+% \paragraph{Identity Provider:} This is the component serving as Identity and Access Management (IAM). It's responsible for assigning identities to participants, verifying identity claims and granting access based on identities. 
+% It comprises three components: 
+%         \begin{itemize}
+%             \item CAs: One or multiple certificate authorities are responsible for issuing certificates to participants upon request. They are also responsible for revoking certificates. They are the trust anchors by which all other components can be verified.
+%             \item Dynamic Attribute Provisioning Service (DAPS): It complements the certificates issued by CAs with more volatile attributes in form of tokens. Connectors can request Dynamic Attribute Tokens (DATs) from DAPS to prove their attributes to other components.
+%             \item Participant Information Service (ParIS):  It provides business-related information about participants in the IDS that have been checked by the Support Organization. Similar to the way Broker provides metadata about data assets, ParIS provides metadata about participants.
+%         \end{itemize}
+%     \item IDS Apps: These are re-usable software components that can be deployed inside the IDS Connector. They are mainly used to transform or analyze data. However, they can also be used to connect to enterprise services, or to allow the connector to be controlled by external systems. Data apps can be chained and bundled.
+%     \item App Store: As the name suggests, it is a marketplace for IDS Apps. It contains endpoints to publish, search, and download IDS Apps. It is a Connector on its own, so it should pass the IDS certification criteria and provide a self-description.
+%     \item Vocabulary Provider: To facilitate cooperation of different IDS components, a common vocabulary is required. The vocabulary provider enables the participants to define and publish their own vocabularies. Vocabularies typically follow the RDF standard. An example usage is to reference an RDF URI in the Self-Description of a data asset.
+% \end{itemize}
+
+% Apart from the components described by the IDS RAM, there are other components that are not part of the IDS RAM but are relevant to our use case. These components are described below.
+
+% \begin{itemize}
+%     \item Sanitization App: This is an IDS App that is responsible for sanitizing the data. It is deployed inside the IDS Connector. It is responsible for removing the sensitive information from the data before it is shared with other participants. IDS App is suitable for this task because dealing with sensitive data requires a high level of trust. Apps are certified and verified by the App Store. Furthermore, they are executed within the Connector, so they have access to the data before it is shared with other participants. This is important because it prevents the data from being leaked before it is sanitized. 
+% \end{itemize}
 
 \section{Realization / Implementation} % 1 Page
 \label{sec:realization}
@@ -404,83 +424,108 @@ Apart from the components described by the IDS RAM, there are other components t
 
 % - How they fit with dataspace components?
 
-\subsection*{IDS Connector}
-The IDS Association publishes a monthly report of the current state of all the data connectors used for exchange of data, not limited to the IDS compliant connectors.
- Dam et al. \cite{dam_survey_2023} investigated this report and published a survey in September 2023. They found that only 4 connectors have their source code available on a public repository: 1) IDS Dataspace Connector (DSC) by sovity, Eclipse Dataspace Connector (EDC), the TRUsted Engineering (TRUE) Connector, and the Trusted Connector by Fraunhofer AISEC.
-
-In addition to that, I found two more: First, IDS Integration Toolbox by Open Logistics Foundation which is a wrapper around the DSC. Second, TNO Security Gateway (TSG) initially developed by TNO which has implementations for many IDS components. It is used in Smart Connected Supplier Network (SCSN) dataspace and has a documentation.
-However, it has no stars on gitlab.
-
-The overview of different conenctors is shown in table \ref{tab:connectors}.
-
-\begin{table}[ht]
-    \label{tab:connectors}
-    \centering
-    \begin{tabular}{|c c c c c c|}
-    \hline
-    \textbf{Name} & \textbf{Created} & \textbf{Stars} & \textbf{Commits} & \textbf{Released} & \textbf{Hosted} \\
-    \hline
-    \hline
-    DSC & 07.10.2020 & 27[+101] & 2600 & 10.22 & \href{https://github.com/International-Data-Spaces-Association/DataspaceConnector}{Github} \\
-    \hline
-    EDC & 13.01.2021 & 202 & 1817 & 10.23 & \href{https://github.com/eclipse-edc/Connector}{Github} \\
-    \hline
-    TRUE & 30.10.2020 & 19 & 122 & 08.23 & \href{https://github.com/Engineering-Research-and-Development/true-connector}{Github} \\
-    \hline
-    Trusted & 05.09.2017 & 43 & 2221 & 02.23 & \href{https://github.com/Fraunhofer-AISEC/trusted-connector}{Github} \\ 
-    \hline
-    Toolbox & 31.03.2022 & 3 & 172 & 04.23 & \href{https://git.openlogisticsfoundation.org/silicon-economy/base/ids/ids-integration-toolbox}{Self-Hosted} \\
-    \hline
-    TSG & 12.05.2021 & 0 & 243 & 08.23 & \href{https://gitlab.com/tno-tsg}{Gitlab} \\
-    \hline
-    \end{tabular}
-    \caption{Available IDS Connectors}
-\end{table}
-
-Most number of stars and most recent release being a deciding factor, I will choose EDC to base my implementation on.
-
-\subsection*{IDS Testbed}
-The IDS association defines Minimum Viable dataspace (MVDS) as the minimum set of components that provide the ability to do secure and sovereign data exchange. They specify the required components as follows: Two Connectors (a data provider and a consumer), an Identity Provider (Dynamic Attribute Provisioning Service, Certificate Authority). IDSA has published an open-source project, \href{https://github.com/International-Data-Spaces-Association/IDS-testbed}{IDS Testbed}, that contains instructions to install and orchestrate these set of minimum components. It references open-source implementations of these components, see table \ref{tab:components} to find source code of these components.
-
-\begin{table}[ht]
-    \label{tab:components}
-    \centering
-    \begin{tabular}{|c|c|c|c|}
-    \hline
-    \textbf{Component} & \textbf{Source Code} & \textbf{Version} & \textbf{Language} \\
-    \hline
-    IDS Testbed & \href{https://github.com/International-Data-Spaces-Association/IDS-testbed}{Testbed Git} & 1.0 & Docker-Compose \\
-    \hline
-    Connector & \href{https://github.com/International-Data-Spaces-Association/DataspaceConnector/tree/v8.0.2}{Connector Git} & 8.0.2 & Java \\
-    \hline
-    Metadata Broker & \href{https://github.com/International-Data-Spaces-Association/metadata-broker-open-core}{Broker Git} & 5.0.3 & Java \\
-    \hline
-    DAPS & \href{https://github.com/International-Data-Spaces-Association/omejdn-daps}{DAPS Git} & 1.6.0 & Ruby \\
-    \hline
-    Certificate Authority & \href{https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/CertificateAuthority}{Testbed Git} & --- & Python \\
-    \hline
-    App Store & \href{https://github.com/International-Data-Spaces-Association/IDS-AppStore}{App Store Git} & 3.0.0 & Java \\
-    \hline
-    \end{tabular}
-    \caption{Necessary Components}
-\end{table}
-
-In addition to the aforementioned components, some new ones need to be implemented from scratch: App Store, ParIS, Clearing House, Vocabulary Hub. Of course, the required IDS Apps should be implemented, which includes, the Sanitization App. 
-For the App Store there is a published project (\href{https://github.com/International-Data-Spaces-Association/IDS-AppStore}{App Store Git}) which is not included in the testbed and might not be fully functional.
-
-\subsection*{Usage Policies}
-To describe usage policies IDS defines its own Usage Control Language which is an extension of Open Digital Rights Language (ODRL). It is a machine readable format which is technology agnostic. There are multiple mechanism to enforce these policies automatically. The position paper on IDS Usage Control \cite{eitel_usage_2021} lists the following mechanisms: MYDATA Control Technologies, Logic based Usage Control (LUCON), and Degree (D°). According to the paper, MYDATA Control Technologies is the most mature and comprehensive. It is also the only one that is implemented in the IDS Testbed. Therefore, I will use MYDATA Control Technologies to enforce the usage policies. The usage control is enforced in the IDS Connector possibly using a separate application container. It comprises three different components: PMP, manages policies and creating them based on some templates, PDP, evaluates the policies and decides whether to allow or deny the request, and PEP, enforces the decision made by PDP. The overview of the components is shown in figure \ref{fig:connector}.
-
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=\textwidth]{connector}
-    \caption{Connector Overview}
-    \label{fig:connector}
+    \includegraphics[width=\textwidth]{implementation.png}
+    \caption{System Architecture Diagram with Technologies}
+    \label{fig:implementation}
 \end{figure}
 
 
-\subsection*{Sanitization App}
-Removing all sensitive data from CTI in general can be a difficult task. There are different CTI formats and each format has its own structure. Furthermore, deciding whether a value contains confidential information or not is not straight-forward. Even a sophisticated machine learning approach requires a lot of data with different types of confidential information to be trained on. Therefore, I will focus on creating a base sanitization app that is easily extensible to detect more sensitive data. To start, it should support sanitizing JSON based CTI formats, and a configurable set of regex rules to detect sensitive data. Refining this app to support more formats and more sophisticated detection mechanisms is out of scope of this thesis.
+To implement the components mentioned in the last section we are going to use different technologies and tools. An overview is illustrated in figure \ref{fig:implementation}.
+
+\paragraph{Dataspace Connector}
+There are different dataspace specifications, but IDS RAM is one that most likely suit our use case.
+There are open-source implementations of IDS components such as IDS Connector. An open-source implementation is Eclipse Dataspace Connector (EDC) \footnote{https://github.com/eclipse-edc/Connector}. However, if during the analysis or implementation milestone, we realize that it does not suit our use case, we might switch to simpler solutions such as Solid \footnote{https://solidproject.org}.
+
+\paragraph{Data Modelling}
+For expressing the data models we try to stick to the standard formats as much as possible. The result of this task is the vocabularies and ontologies. For usage policies, there are different formats, the most prominent one is ODRL \footnote{https://www.w3.org/TR/odrl-model/}. Also, for the CTI data model we analyze existing standards such as STIX, VERIS, IODEF. Finally, for the data catalogs a common format is DCAT \footnote{https://www.w3.org/TR/vocab-dcat-3/}.
+
+\paragraph{Integration with TIP}
+We will an open-source threat intelligence platform, MISP \footnote{https://www.misp-project.org/}, and use its HTTP API to insert the data.
+
+\paragraph{Sharing Panel} The panel is a simple website, possibly implemented with HTML and Javascript.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% \subsection*{IDS Connector}
+% The IDS Association publishes a monthly report of the current state of all the data connectors used for exchange of data, not limited to the IDS compliant connectors.
+%  Dam et al. \cite{dam_survey_2023} investigated this report and published a survey in September 2023. They found that only 4 connectors have their source code available on a public repository: 1) IDS Dataspace Connector (DSC) by sovity, Eclipse Dataspace Connector (EDC), the TRUsted Engineering (TRUE) Connector, and the Trusted Connector by Fraunhofer AISEC.
+
+% In addition to that, I found two more: First, IDS Integration Toolbox by Open Logistics Foundation which is a wrapper around the DSC. Second, TNO Security Gateway (TSG) initially developed by TNO which has implementations for many IDS components. It is used in Smart Connected Supplier Network (SCSN) dataspace and has a documentation.
+% However, it has no stars on gitlab.
+
+% The overview of different conenctors is shown in table \ref{tab:connectors}.
+
+% \begin{table}[ht]
+%     \label{tab:connectors}
+%     \centering
+%     \begin{tabular}{|c c c c c c|}
+%     \hline
+%     \textbf{Name} & \textbf{Created} & \textbf{Stars} & \textbf{Commits} & \textbf{Released} & \textbf{Hosted} \\
+%     \hline
+%     \hline
+%     DSC & 07.10.2020 & 27[+101] & 2600 & 10.22 & \href{https://github.com/International-Data-Spaces-Association/DataspaceConnector}{Github} \\
+%     \hline
+%     EDC & 13.01.2021 & 202 & 1817 & 10.23 & \href{https://github.com/eclipse-edc/Connector}{Github} \\
+%     \hline
+%     TRUE & 30.10.2020 & 19 & 122 & 08.23 & \href{https://github.com/Engineering-Research-and-Development/true-connector}{Github} \\
+%     \hline
+%     Trusted & 05.09.2017 & 43 & 2221 & 02.23 & \href{https://github.com/Fraunhofer-AISEC/trusted-connector}{Github} \\ 
+%     \hline
+%     Toolbox & 31.03.2022 & 3 & 172 & 04.23 & \href{https://git.openlogisticsfoundation.org/silicon-economy/base/ids/ids-integration-toolbox}{Self-Hosted} \\
+%     \hline
+%     TSG & 12.05.2021 & 0 & 243 & 08.23 & \href{https://gitlab.com/tno-tsg}{Gitlab} \\
+%     \hline
+%     \end{tabular}
+%     \caption{Available IDS Connectors}
+% \end{table}
+
+% Most number of stars and most recent release being a deciding factor, I will choose EDC to base my implementation on.
+
+% \subsection*{IDS Testbed}
+% The IDS association defines Minimum Viable dataspace (MVDS) as the minimum set of components that provide the ability to do secure and sovereign data exchange. They specify the required components as follows: Two Connectors (a data provider and a consumer), an Identity Provider (Dynamic Attribute Provisioning Service, Certificate Authority). IDSA has published an open-source project, \href{https://github.com/International-Data-Spaces-Association/IDS-testbed}{IDS Testbed}, that contains instructions to install and orchestrate these set of minimum components. It references open-source implementations of these components, see table \ref{tab:components} to find source code of these components.
+
+% \begin{table}[ht]
+%     \label{tab:components}
+%     \centering
+%     \begin{tabular}{|c|c|c|c|}
+%     \hline
+%     \textbf{Component} & \textbf{Source Code} & \textbf{Version} & \textbf{Language} \\
+%     \hline
+%     IDS Testbed & \href{https://github.com/International-Data-Spaces-Association/IDS-testbed}{Testbed Git} & 1.0 & Docker-Compose \\
+%     \hline
+%     Connector & \href{https://github.com/International-Data-Spaces-Association/DataspaceConnector/tree/v8.0.2}{Connector Git} & 8.0.2 & Java \\
+%     \hline
+%     Metadata Broker & \href{https://github.com/International-Data-Spaces-Association/metadata-broker-open-core}{Broker Git} & 5.0.3 & Java \\
+%     \hline
+%     DAPS & \href{https://github.com/International-Data-Spaces-Association/omejdn-daps}{DAPS Git} & 1.6.0 & Ruby \\
+%     \hline
+%     Certificate Authority & \href{https://github.com/International-Data-Spaces-Association/IDS-testbed/tree/master/CertificateAuthority}{Testbed Git} & --- & Python \\
+%     \hline
+%     App Store & \href{https://github.com/International-Data-Spaces-Association/IDS-AppStore}{App Store Git} & 3.0.0 & Java \\
+%     \hline
+%     \end{tabular}
+%     \caption{Necessary Components}
+% \end{table}
+
+% In addition to the aforementioned components, some new ones need to be implemented from scratch: App Store, ParIS, Clearing House, Vocabulary Hub. Of course, the required IDS Apps should be implemented, which includes, the Sanitization App. 
+% For the App Store there is a published project (\href{https://github.com/International-Data-Spaces-Association/IDS-AppStore}{App Store Git}) which is not included in the testbed and might not be fully functional.
+
+% \subsection*{Usage Policies}
+% To describe usage policies IDS defines its own Usage Control Language which is an extension of Open Digital Rights Language (ODRL). It is a machine readable format which is technology agnostic. There are multiple mechanism to enforce these policies automatically. The position paper on IDS Usage Control \cite{eitel_usage_2021} lists the following mechanisms: MYDATA Control Technologies, Logic based Usage Control (LUCON), and Degree (D°). According to the paper, MYDATA Control Technologies is the most mature and comprehensive. It is also the only one that is implemented in the IDS Testbed. Therefore, I will use MYDATA Control Technologies to enforce the usage policies. The usage control is enforced in the IDS Connector possibly using a separate application container. It comprises three different components: PMP, manages policies and creating them based on some templates, PDP, evaluates the policies and decides whether to allow or deny the request, and PEP, enforces the decision made by PDP. The overview of the components is shown in figure \ref{fig:connector}.
+
+% \begin{figure}[ht]
+%     \centering
+%     \includegraphics[width=\textwidth]{connector}
+%     \caption{Connector Overview}
+%     \label{fig:connector}
+% \end{figure}
+
+
+% \subsection*{Sanitization App}
+% Removing all sensitive data from CTI in general can be a difficult task. There are different CTI formats and each format has its own structure. Furthermore, deciding whether a value contains confidential information or not is not straight-forward. Even a sophisticated machine learning approach requires a lot of data with different types of confidential information to be trained on. Therefore, I will focus on creating a base sanitization app that is easily extensible to detect more sensitive data. To start, it should support sanitizing JSON based CTI formats, and a configurable set of regex rules to detect sensitive data. Refining this app to support more formats and more sophisticated detection mechanisms is out of scope of this thesis.
 
 \section{Evaluation} % 0.5 Page
 \label{sec:evaluation}
@@ -508,13 +553,29 @@ The above-mentioned items might be subjective and change by modifying the chosen
 Another approach which can sound more objective is to design a survey. It should use some standard templates to be comparable. The survey should be conducted on a group of experts in the field of threat information sharing after presenting them our approach. The survey should be designed to measure the effectiveness of our design in terms of privacy and security. Ideally, 10 to 20 experts should be interviewed. There is a risk of not having enough experts available. In that case, we fall back to the first approach.
 
 
-\section{Timeline / Milestones / Project Plan} % 0.75 Page
+\section{Project Plan} % 0.75 Page
 \label{sec:timeline}
 
-TODO
+The work is planned to take 6 month (26 weeks), and consists of 5 Milestones:
 
-\newpage
-
+\paragraph*{Milestone 1 (1 Dec - 21 Dec: 3 weeks): Foundation} 
+    \begin{itemize}
+        \item Related work: Review the related works
+        \item Define use case scenarios: Find concrete scenarios and requirements
+    \end{itemize}
+\paragraph*{Milestone 2 (21 Dec - 12 Jan: 3 weeks): Analysis and Modelling}
+    \begin{itemize}
+        \item Information Modelling: Define required data models
+        \item System Design: Specify the components and the data flows
+    \end{itemize}
+\paragraph*{Milestone 3 (12 Jan - 9 Mar: 7 weeks): Prototype Implementation}
+    \begin{itemize}
+        \item Setup Dataspace: Implement the components for the dataspace
+        \item Integration with TIP
+        \item Sharing Panel
+    \end{itemize}
+\paragraph*{Milestone 4 (9 Mar - 7 Apr: 4 weeks): Evaluation}
+\paragraph*{Milestone 5 (7 Apr - 29 May: 7 weeks): Writing and buffer}
 
 \bibliography{References} 
 \bibliographystyle{ieeetr}
