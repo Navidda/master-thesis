@@ -54,7 +54,7 @@
 
 \section{Abstract}
 
-TODO
+This is a proposal for a master's thesis in the area of cyber security and data management. Due to the complexity of the ever-changing threat landscape and the interconnected nature of the threats, organizations can benefit from collaborative cyber defense. They can achieve collaboration by sharing cyber security information. There are certain barriers identified in the litereture for this process, such as privacy, trust, and regulatory issues. In this research we are going to investigate the capabilities of a data sharing concept called dataspaces to address these barriers. This document consists of an introduction of the related concepts, a short description of state of the art, a preliminary requirement analysis, a conceptual approach and methods to implement and evaluate the contributions.
 
 \section{Introduction} % 1.5 Page
 
@@ -390,7 +390,8 @@ We need to create data models to be used in the platform. The data models should
 
 \subsection{Integration with TIP} The sharing platform is only useful when it is integrated to existing tool and platforms for threat intelligence. We should find how data can be extracted from existing threat databases and how the received data could be integrated in the TIP in the data consumer side.
 
-\subsection{Sharing Panel} The direct users of the platform might not be programmers, so a graphical user interface is helpful. It should support the different usage scenarios of the platform, such as searching for offers, negotiation of contracts, specifying usage policies, and uploading the data to the dataspace.
+\subsection{Sharing Panel} 
+To allow the user of the platform to trigger the necessary functions we need a user interface. The panel is a component that calls the corresponding endpoints in the dataspace connector. It should support the different usage scenarios of the platform, such as searching for offers, negotiation of contracts, specifying usage policies, and uploading the data to the dataspace.
 
 % Important dataspace components that are relevant to our use case are listed below.
 % \paragraph*{Connector:} It is the primary component involved in the data exchange acting either as data provider or consumer. Not only it performs the actual data exchange but also the enforcement of the usage control policies as well as authentication. It can be operated on-premises or in a cloud environment. It will run the IDS Apps that do process the data among other things (more on that later). It uses application container management technology to isolate data apps and core functionalities.
@@ -444,7 +445,7 @@ For expressing the data models we try to stick to the standard formats as much a
 \paragraph{Integration with TIP}
 We will an open-source threat intelligence platform, MISP \footnote{https://www.misp-project.org/}, and use its HTTP API to insert the data.
 
-\paragraph{Sharing Panel} The panel is a simple website, possibly implemented with HTML and Javascript.
+\paragraph{Sharing Panel} The panel is a python script with different arguments for different functionalities. In a real-world scenario it is a graphical user interface which is out of scope of this thesis.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -537,20 +538,24 @@ We will an open-source threat intelligence platform, MISP \footnote{https://www.
 % - The steps of the scenario and the expected results
 % - How to measure the performance?
 
-My contribution being design of a sharing platform for CTI data, the evaluation should measure the effectiveness of the sharing platform. The problem is that according to my research, there is no benchmark available and no defined metrics to this aim. Having no baseline to compare against, it seems hard to reach an objective evaluation. Furthermore, many performance metrics depend on the implementation, infrastructure, and the details of the scenario. Since, my main contribution is the design of the platform, not the implementation, some metrics can be misleading. 
+The evaluation is consisted of two approaches, analytical and experimental. In the analytical approach, we will go through the identified requirements and validate the designed architecture against them, to measure the extent to which the requirements are fulfilled. Moreover, will dive deeper in the security and privacy requirements and perform a comparative analysis against our baseline, MISP. We will also take a look at the threats in the energy sector and see how our platform could mitigate them.
 
-However, several options can be thought of. First, by focusing on the main effect of using dataspaces for data sharing, which is the addition of usage control and changing the data flow, one can define a few specific metrics. Having defined some usage case scenarios and a sample implementation, we can measure for example the following metrics: 
-\begin{itemize}
-    \item Number of unnecessary participants that should have access to the data.
-    \item The difficulty of changing the usage policies.
-    \item How difficult it is to revoke access to the data.
-    \item Variety of types of usage policies that are enforceable.
-    \item How many scenarios are significantly improved using our approach.
-\end{itemize}
+The experimental approach is based on simulations using the created prototype. By executing different use case scenarios on the prototype we can validate qualitively the effectiveness of the platform in action and see how the requirements are satisfied. We can also measure quantitively some performance metrics such as throughput, delay and resource consumption. Similar to the analytical approach, we dive deep in the security and privacy requirements and simulate some attack vectors and see how the platform can help defend against them.
 
-The above-mentioned items might be subjective and change by modifying the chosen scenarios, but investigating it can provide some insights into the effectiveness of the dataspaces.
+% My contribution being design of a sharing platform for CTI data, the evaluation should measure the effectiveness of the sharing platform. The problem is that according to my research, there is no benchmark available and no defined metrics to this aim. Having no baseline to compare against, it seems hard to reach an objective evaluation. Furthermore, many performance metrics depend on the implementation, infrastructure, and the details of the scenario. Since, my main contribution is the design of the platform, not the implementation, some metrics can be misleading. 
 
-Another approach which can sound more objective is to design a survey. It should use some standard templates to be comparable. The survey should be conducted on a group of experts in the field of threat information sharing after presenting them our approach. The survey should be designed to measure the effectiveness of our design in terms of privacy and security. Ideally, 10 to 20 experts should be interviewed. There is a risk of not having enough experts available. In that case, we fall back to the first approach.
+% However, several options can be thought of. First, by focusing on the main effect of using dataspaces for data sharing, which is the addition of usage control and changing the data flow, one can define a few specific metrics. Having defined some usage case scenarios and a sample implementation, we can measure for example the following metrics: 
+% \begin{itemize}
+%     \item Number of unnecessary participants that should have access to the data.
+%     \item The difficulty of changing the usage policies.
+%     \item How difficult it is to revoke access to the data.
+%     \item Variety of types of usage policies that are enforceable.
+%     \item How many scenarios are significantly improved using our approach.
+% \end{itemize}
+
+% The above-mentioned items might be subjective and change by modifying the chosen scenarios, but investigating it can provide some insights into the effectiveness of the dataspaces.
+
+% Another approach which can sound more objective is to design a survey. It should use some standard templates to be comparable. The survey should be conducted on a group of experts in the field of threat information sharing after presenting them our approach. The survey should be designed to measure the effectiveness of our design in terms of privacy and security. Ideally, 10 to 20 experts should be interviewed. There is a risk of not having enough experts available. In that case, we fall back to the first approach.
 
 
 \section{Project Plan} % 0.75 Page
