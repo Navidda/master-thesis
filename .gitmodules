@@ -1,3 +1,6 @@
 [submodule "true-connector"]
 	path = true-connector
 	url = git@github.com:Navidda/true-connector.git
+[submodule "IDS-testbed"]
+	path = IDS-testbed
+	url = git@github.com:Navidda/IDS-testbed.git
