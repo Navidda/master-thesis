@@ -4,3 +4,6 @@
 [submodule "IDS-testbed"]
 	path = IDS-testbed
 	url = git@github.com:Navidda/IDS-testbed.git
+[submodule "misp-docker"]
+	path = misp-docker
+	url = git@github.com:Navidda/misp-docker
