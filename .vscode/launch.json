@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ExampleApplication<my-data-uc-app>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "de.fraunhofer.iese.mydata.example.ExampleApplication",
+            "projectName": "my-data-uc-app",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

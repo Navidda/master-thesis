@@ -3,7 +3,6 @@ package de.fraunhofer.iese.mydata.example;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import de.fraunhofer.iese.mydata.pep.EnablePolicyEnforcementPoint;
 import de.fraunhofer.iese.mydata.pip.EnablePolicyInformationPoint;
 import de.fraunhofer.iese.mydata.pxp.EnablePolicyExecutionPoint;
