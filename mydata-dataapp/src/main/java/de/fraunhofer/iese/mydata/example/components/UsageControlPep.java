@@ -19,7 +19,7 @@ import rx.Observable;
 @Modifiers(classNames = {
         AppendModifierMethod.class, ReplaceModifierMethod.class, DeleteModifierMethod.class, AnagramModifierMethod.class, SubStringModifierMethod.class
 })
-public interface ExamplePEP {
+public interface UsageControlPep {
   @EventSpecification(action = "enforceObject")
   Observable<Event> enforceObject(@EventParameter(name = "object") Object object);
 
@@ -29,4 +29,10 @@ public interface ExamplePEP {
   @EventSpecification(action = "enforcePerson")
   Observable<Event> enforcePerson(@EventParameter(name = "person") Person person);
 
+  @EventSpecification(action = "use")
+  Observable<Event> enforceUse(
+      @EventParameter(name = "TargetDataUri") String targetDataUri,
+      @EventParameter(name = "MsgTarget") Object msgTarget,
+      @EventParameter(name = "DataObject") Object dataObject
+  );
 }

@@ -1,7 +1,7 @@
 
 package de.fraunhofer.iese.mydata.example.service;
 
-import de.fraunhofer.iese.mydata.example.components.ExamplePEP;
+import de.fraunhofer.iese.mydata.example.components.UsageControlPep;
 import de.fraunhofer.iese.mydata.example.model.Person;
 import de.fraunhofer.iese.mydata.policy.event.Event;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class ExampleService {
 
   @Autowired
-  ExamplePEP examplePep;
+  UsageControlPep examplePep;
 
   /**
    *
