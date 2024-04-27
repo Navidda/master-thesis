@@ -1,0 +1,17 @@
+server:
+  port : 8080
+
+mydata:
+  pmp:
+    cloud:
+      url: https://management.mydata-control.de
+      client-id: urn:client:rwth-dbis-solution:pep
+      client-secret: 32gn7p8OltB8PrsR
+  solution: urn:solution:rwth-dbis-solution
+  external-server-url: http://static.212.166.13.49.clients.your-server.de/
+  operational-mode: cloud
+
+spring:
+    mvc:
+      pathmatch:
+        matching-strategy:  ant_path_matcher
