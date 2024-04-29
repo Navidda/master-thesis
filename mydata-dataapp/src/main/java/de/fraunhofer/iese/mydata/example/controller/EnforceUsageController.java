@@ -27,12 +27,9 @@ import de.fraunhofer.iese.mydata.example.exception.UsagePermissionDeniedExceptio
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class EnforceUsageController {
   private final static Logger LOG = LoggerFactory.getLogger(EnforceUsageController.class);
-  private final UsageControlEnforcementService usageControlEnforcementService;
 
   @Autowired
-  public EnforceUsageController(UsageControlEnforcementService usageControlEnforcementService) {
-    this.usageControlEnforcementService = usageControlEnforcementService;
-  }
+  private UsageControlEnforcementService usageControlEnforcementService;
 
   @PostMapping(value = "/use", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
   public ResponseEntity<Object> usageControlUse(@RequestBody IdsUseObject idsUseObject) {
