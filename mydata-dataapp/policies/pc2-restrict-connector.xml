@@ -1,0 +1,47 @@
+
+<!-- https://github.com/International-Data-Spaces-Association/IDS-G/blob/main/UsageControl/Contract/Policies/pc2-ids-restrict-connector-example.json -->
+<!-- I replaced the solution -->
+<policy id='urn:policy:rwth-dbis-solution:restrict-connector' 
+    description='This usage policy allows the use of data feed_index if the connector is either connector1 or connector2' 
+    xmlns='http://www.mydata-control.de/4.0/mydataLanguage' 
+    xmlns:tns='http://www.mydata-control.de/4.0/mydataLanguage' 
+    xmlns:parameter='http://www.mydata-control.de/4.0/parameter' 
+    xmlns:pip='http://www.mydata-control.de/4.0/pip' 
+    xmlns:function='http://www.mydata-control.de/4.0/function' 
+    xmlns:event='http://www.mydata-control.de/4.0/event' 
+    xmlns:constant='http://www.mydata-control.de/4.0/constant' 
+    xmlns:variable='http://www.mydata-control.de/4.0/variable' 
+    xmlns:variableDeclaration='http://www.mydata-control.de/4.0/variableDeclaration' 
+    xmlns:valueChanged='http://www.mydata-control.de/4.0/valueChanged' 
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' 
+    xmlns:date='http://www.mydata-control.de/4.0/date' 
+    xmlns:time='http://www.mydata-control.de/4.0/time' 
+    xmlns:day='http://www.mydata-control.de/4.0/day'>
+  <mechanism event='urn:action:rwth-dbis-solution:use'>
+    <if>
+        <and>  
+      <equals> 
+        <event:string eventParameter='TargetDataUri' default=''/>  
+        <constant:string value='http://w3id.org/engrd/connector/artifact/feed_index.json'/>  
+      </equals> 
+          <pip:boolean method='urn:info:rwth-dbis-solution:connector' default='false'>
+            <parameter:string name='connector-uri1' value='?connector1URI'/>
+            <parameter:string name='connector-uri2' value='?connector2URI'/>
+            <parameter:string name='operator' value='subsetOf'/>
+          </pip:boolean> 
+        </and>  
+        <then> 
+        <allow/> 
+        </then>  
+      </if>   
+    <elseif>
+      <equals>
+        <constant:string value='http://w3id.org/engrd/connector/artifact/feed_index.json'/>
+        <event:string eventParameter='TargetDataUri' default=''/>
+      </equals>
+      <then>
+        <inhibit/> 
+      </then>
+    </elseif>
+  </mechanism>
+</policy>
