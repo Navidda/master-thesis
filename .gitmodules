@@ -7,3 +7,9 @@
 [submodule "misp-docker"]
 	path = misp-docker
 	url = git@github.com:Navidda/misp-docker
+[submodule "mydata-pap"]
+	path = mydata-pap
+	url = https://gitlab.cc-asp.fraunhofer.de/iese-ids/odrl_pap_webservice.git
+[submodule "rego-translator"]
+	path = rego-translator
+	url = https://gitlab.cc-asp.fraunhofer.de/iese-ids/rego-translator.git

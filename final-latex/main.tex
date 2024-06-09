@@ -1,0 +1,27 @@
+\documentclass[11pt,a4paper,twoside,openright,final]{memoir}
+
+\input{preamble}
+
+\begin{document}
+
+\frontmatter
+\input{title}
+\input{abstract}
+\tableofcontents
+\pagebreak
+\listoffigures
+\firmlists
+
+\mainmatter
+
+\include{chapters/introduction}
+\include{chapters/chapter_two}
+
+\backmatter % Appendices, bibliography, etc.
+\appendix
+\include{appendices/appendix_a}
+\include{appendices/appendix_b}
+
+\printbibliography
+
+\end{document}
