@@ -1,27 +1,34 @@
 \documentclass[11pt,a4paper,twoside,openright,final]{memoir}
 
+
 \input{preamble}
+\input{frontmatter/acronyms}
+\input{frontmatter/glossaries}
 
 \begin{document}
 
 \frontmatter
-\input{title}
-\input{abstract}
+\gls{formula}
+\include{frontmatter/title}
+\include{frontmatter/abstract}
 \tableofcontents
 \pagebreak
 \listoffigures
 \firmlists
+\clearpage
 
 \mainmatter
-
-\include{chapters/introduction}
-\include{chapters/chapter_two}
+\include{mainmatter/introduction}
+\include{mainmatter/background}
+\include{mainmatter/chapter_two}
+\clearpage
 
 \backmatter % Appendices, bibliography, etc.
 \appendix
-\include{appendices/appendix_a}
-\include{appendices/appendix_b}
-
+\include{backmatter/appendix_a}
+\include{backmatter/appendix_b}
+\printglossary[type=\acronymtype] % TODO: fix this
+\printglossary
 \printbibliography
 
 \end{document}
