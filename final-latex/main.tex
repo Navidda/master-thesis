@@ -1,6 +1,5 @@
 \documentclass[11pt,a4paper,twoside,openright,final]{memoir}
 
-
 \input{preamble}
 \input{frontmatter/acronyms}
 \input{frontmatter/glossaries}
@@ -8,7 +7,6 @@
 \begin{document}
 
 \frontmatter
-\gls{formula}
 \include{frontmatter/title}
 \include{frontmatter/abstract}
 \tableofcontents
@@ -30,5 +28,6 @@
 \printglossary[type=\acronymtype] % TODO: fix this
 \printglossary
 \printbibliography
+\include{backmatter/license}
 
 \end{document}
