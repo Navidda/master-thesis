@@ -16,7 +16,7 @@ A relevant concept here is the Competitive Intelligence which is about gaining m
 \smallskip
 The process and the product of the process of collecting, analysing and disseminating the information which is helpful in decision making.
 
-To ensure the effectiveness, a systematic approach to intelligence is necessary. Therefore a lifecycle is often mentioned in the litereture to explain all the stages in the process. It consists of 6 stages that follow each other in circle, where each one builds on the previous one (Figure \ref{fig:cti-lifecycle}).
+To ensure the effectiveness, a systematic approach to intelligence is necessary. Therefore a life-cycle is often mentioned in the literature to explain all the stages in the process. It consists of 6 stages that follow each other in circle, where each one builds on the previous one (Figure \ref{fig:cti-lifecycle}).
 
 \begin{figure}[ht]
     \centering
@@ -53,9 +53,20 @@ Technical CTI concerns with the indicators of compromise, meaning concrete techn
 \subsubsection{The Role of Collaboration}
 Organizations could improve their CTI capabilities through collaboration \cite{zibak_cyber_2019}. They can collaborate by sharing their findings with each other which we call CTI sharing. There are several benefits of sharing in the literature. \cite{zibak_cyber_2019} categorizes them into four categories: operational, organizational, economic, and policy related benefits. First, the operational benefits include reduce duplicate information handling and support breach detection and response. Second, organisational benefits such as improving overall security posture and situational awareness, combating skills gap, cross-checking different sources, and expanding professional networks. Third, economic benefits which are total cost savings, allowing governmental subsidies, reducing investment uncertainties. Lastly, policy related benefits such as reinforcing the connection with the government agencies.
 
+\subsubsection{Sharing Models}
+
+As shown in \ref{fig:sharing-models}, there are three types of sharing. First, peer to peer, which is a direct exchange, second, peer to repository which allow for subscription to published events, and third, a hybrid model that incorporates the mentioned models.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{diagrams/background/sharing_models.png}
+    \caption{Information Sharing Models \cite{wagner_cyber_2019}}
+    \label{fig:sharing-models}
+\end{figure}
+
 \subsubsection{Collaboration Communities}
 \label{subsubsec:collaboration-communities}
-The current collaboration communities could be segregated into three different types, namely peer, commercial, and government \cite{connolly_trusted_2014}:
+The repository sharing model often happen in the form of sharing communities. The current collaboration communities could be segregated into three different types, namely peer, commercial, and government \cite{connolly_trusted_2014}:
 
 \paragraph{Peer Communities}
 Peer communities are the most common type \cite{connolly_trusted_2014}. These collaboration happen in a community of participants with shared goals where they know and trust each other by means of meetings and so on. An example type of existing sharing communities are Information Sharing and Analysis Centers (ISACs), which are non-profit organizations that help organizations in a specific sector, usually a critical national infrastructure, e.g. electricity, water, gas, health care, finance, etc., to share CTI with each other. 
@@ -68,14 +79,25 @@ The information exchange is based on a trust achieved by confidentiality agreeme
 Another type of peer communities are in the form of Open Source Intelligence (OSINT). There communities are accessible via internet and accessible via everyone, public CTI feeds, online forums, or social media accounts (e.g. Twitter) are common channels of OSINT.
 
 \paragraph{Commercial Communities}
-Commercial communities are the second type of collaboration communities. These are usually managed by a third party, and the participants pay a fee to access the shared information. The third party is responsible for the quality of the information and the trust between the participants. It also often annonimizes the information to protect the privacy of the participants. iDefense, Symantec, McAfee, Mandiant, Arbor Networks, and CrowdStrike are some examples of commercial communities.
+Commercial communities are the second type of collaboration communities. These are usually managed by a third party, and the participants pay a fee to access the shared information. The third party is responsible for the quality of the information and the trust between the participants. It also often annonimizes the information to protect the privacy of the participants. iDefense, Symantec, McAfee, Mandiant, Arbor Networks, and CrowdStrike are some examples of commercial communities. These communities usually use their own proprietary platforms and standards.
 
 \paragraph{Government Communities}
-Finally, the communities managed by the government which form a public-private partnership (PPP) with either mandatory or voluntary participation are the third type. 
+Finally, the communities managed by the government which form a public-private partnership (PPP) with either mandatory or voluntary participation are the third type. National or regional Cybersecurity Emergency Response Teams (CERTs) are common governmental organizations that manage and/or participate in this type of communities.
 
-\subsubsection{CTI Channels and Automation}
+\subsubsection{Towards Automation}
 \label{subsubsec:cti-channels}
-There are various channels for CTI exchange. \cite{wagner_cyber_2019} mentions meetings, E-mails and phonecalls, shared databases, web portals or data feeds. Currently sharing CTI requires a lot of manual labor not only on the provider side, to prepare the information, but also on the consumer side to ingest the data by analyze the quality and relevance of the data and import it to local systems \cite{wagner_cyber_2019}. There means for automated sharing and consumption of CTI has emerged. It is not expected in the near future to drop the security analyst from the loop completely, but it tries to speed up the whole process \cite{wagner_cyber_2019}. To enable expressing CTI in a machine readable format, several protocols have been created  (Table \ref{tab:cti-protocols})
+Traditional CTI exchange is a manual exchange of data through the following means \cite{wagner_cyber_2019}:
+
+\begin{itemize}
+    \item E-mails
+    \item Phone calls
+    \item Web-community portals
+    \item Shared databases
+    \item Data feeds
+\end{itemize}
+This puts the burden of a lot of manual labor not only on the provider side, to prepare and send the information, but also on the consumer side to ingest and analyze the data, verify the quality and relevance of the data and import it to local system \cite{wagner_cyber_2019}. 
+Therefore means for automated sharing and consumption of CTI has emerged. It is not expected in the near future to drop the security analyst from the loop completely, but it tries to speed up the whole process \cite{wagner_cyber_2019}.
+Traditional signature-based methods struggle to reliably detect security breaches because modern, sophisticated attacks are designed to bypass known signatures and exploit multiple vulnerabilities across various systems simultaneously. As a result, organizations must share high-level threat intelligence data to quickly adapt their systems to new threats, utilizing machine-readable formats to eliminate human delay in intelligence sharing \cite{skopik_problem_2016}. To enable expressing CTI in a machine readable format, several protocols have been created  (Table \ref{tab:cti-protocols})
 
 \begin{table}[ht]
     \label{tab:cti-protocols}
@@ -99,19 +121,10 @@ There are various channels for CTI exchange. \cite{wagner_cyber_2019} mentions m
     \caption{CTI Protocols \cite{wagner_cyber_2019}}
 \end{table}
 
-\subsubsection{Sharing Models and Platforms}
-
-As shown in \ref{fig:sharing-models}, there are three types of sharing. First, peer to peer, which is a direct exchange, second, peer to repository which allow for subscription to published events, and third, a hybrid model that incorporates the mentioned models.
-
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=\textwidth]{diagrams/background/sharing_models.png}
-    \caption{Information Sharing Models \cite{wagner_cyber_2019}}
-    \label{fig:sharing-models}
-\end{figure}
-
-\subsubsection{Threat Intelligence Platfrorms (TIPs)}
-Another approach to accomplish a CTI repository is through Threat Intelligence Platforms (TIPs). Although there is no clear defintion of the scope of these platforms \cite{sauerwein_threat_2017}, they typically allow sharing CTI between users as well as collection of CTI from various sources (e.g. OSINT, 3rd party intelligence). However, some only focus on IOCs to be shared, allowing integration to interanal security systems such as Firewall, Intrusion Prevention Systems (IPSs), and Security Information and Event Management (SIEM) for an automated response \ref{fig:tip}. A list of available TIPs are in mentioned in table \ref{tab:tips}. \cite{sauerwein_threat_2017} provides a good survey of these platforms.
+\paragraph{Threat Intelligence Platforms (TIPs)}
+To process machine-readable CTI formats, Threat Intelligence Platforms (TIPs) has emerged. 
+Although there is no clear definition of the scope of these platforms \cite{sauerwein_threat_2017}, they typically allow sharing CTI between users as well as collection of CTI from various sources (e.g. OSINT, 3rd party intelligence). However, some only focus on IOCs to be shared, allowing integration to internal security systems such as Firewall, Intrusion Prevention Systems (IPSs), and Security Information and Event Management (SIEM) for an automated response \ref{fig:tip}. A list of available TIPs are in mentioned in table \ref{tab:tips}. \cite{sauerwein_threat_2017} provides a good survey of these platforms.
+These platforms are often the backbone of existing sharing communities.
 
 \begin{figure}[ht]
     \centering
@@ -209,13 +222,13 @@ Despite the benefits of CTI sharing, there are several challenges that hinder th
 There are several works that try to address the challenges of CTI sharing. 
 
 \subsubsection{Leveraging Blockchain Technology}
-\cite{el-kosairy_survey_2023} provides a survey of existing literature on the use of blockchain technology in CTI sharing. They found that blockchain technology is promising in addressing the challenges of CTI sharing, such as privacy of participants by anonymous identity and at the same time ensuring quality of data and incentivizing the participants to share data due to blockchain based reward systems. However, they also mention that most works are still in the proof of concept phase and the implementation in real world scenarios such as specific industry sectors is not done yet. A notable example is the work of \cite{homan_new_2019} which uses Hyperledge Fabric as a backbone and its channel capabilities to share CTI with specific partners utilizing smart contracts to enforce the traffic light protocol (TLP). In another work, Pahleven et al. \cite{pahlevan_secure_2021} extend the technological capacity of TAXII using Distributed Ledger Technologies (DLT) to enable data non-repudiation and a publish-subscribe middleware to enable real-time sharing.
+\cite{el-kosairy_survey_2023} provides a survey of existing literature on the use of blockchain technology in CTI sharing. They found that blockchain technology is promising in addressing the challenges of CTI sharing, such as privacy of participants by anonymous identity and at the same time ensuring quality of data and incentives for the participants to share data due to blockchain based reward systems. However, they also mention that most works are still in the proof of concept phase and the implementation in real world scenarios such as specific industry sectors is not done yet. A notable example is the work of \cite{homan_new_2019} which uses Hyperledger Fabric as a backbone and its channel capabilities to share CTI with specific partners utilizing smart contracts to enforce the traffic light protocol (TLP). In another work, Pahleven et al. \cite{pahlevan_secure_2021} extend the technological capacity of TAXII using Distributed Ledger Technologies (DLT) to enable data non-repudiation and a publish-subscribe middleware to enable real-time sharing.
 \subsubsection{Open Source CTI} Jesus et al. \cite{jesus_sharing_2023} investigated the state of the art of the open source CTI and found the barriers that have prevented the formation of any widely used open source CTI platform. 
 The barriers mentioned are 1) Legal and regulatory (e.g. GDPR or intellectual property) 2) Interoperability (e.g. different formats) 3) Usefulness and return 4) Market factors (e.g. losing reputation, free-riding) 5) Trust in peers and adversarial usage 6) Confidentiality risks. After studying these barriers, as well as some technical gaps, they present a confidentiality and privacy analysis of sharing a large sample data set of CTI, to make the claim that it is possible to manage risks of sharing using simple techniques like sanitization. Finally, they propose a set of requirements and a reference architecture for an open source threat intelligence platform. 
 \subsubsection{Encryption Based CTI Sharing} De Fuentes et al. \cite{de_fuentes_pracis_2017} presents a scheme called PRACIS to guarantee privacy in cybersecurity information sharing (CIS) networks. They leverage format-preserving and homomorphic encryption primitives to share STIX formatted incident data. They approach allow secure aggregation and forwarding of data in a publish-subscribe architecture. They present a prototype implementation and show that the costs incurred by their approach are easily affordable in real-world scenarios.
 \subsubsection{Incidents Information Sharing Platform (I2SP)} 
 As part of the Phoneix project \cite{phoenix}, Incidents Information Sharing Platform (I2SP), tries to secure European Electrical Power and Energy Systems (EPES) adhering to the NIS directive \cite{skias_pan-european_2021}. It uses the STIX/TAXII protocols to share CTI among the EPES stakeholders, incorporates advanced machine learning and federated learning processes to detect and mitigate coordinated attacks in the EPES. It is inspired by MeliCERTes \cite{noauthor_melicertescsp_2024} which is part of the European Strategy for Cyber Security.  MeliCERTes is a network for establishing confidence and trust among the national Computer Security Incident Response Teams (CSIRTs) of the Member States and for promoting swift and effective operational cooperation. Member States CSIRTs participate on an equal footing in the MeliCERTes Core Service Platform (CSP) within verified Trust Circles for sharing and collaborating on computer security incidents. \cite{noauthor_melicertescsp_2024}
-\subsubsection{C3ISP} Chadwick et. al. \cite{chadwick_cloud-edge_2020} provide a   cloud-edge based data sharing infrastructure, a trust model and a deployment model to satisfy the requirements of four real-world sharing scenario. Their solution allows the data provider the specify the trust level and the desired sanitization approach. They validated their approach in four pilot projects.
+\subsubsection{C3ISP} Chadwick et. al. \cite{chadwick_cloud-edge_2020} provided a cloud-edge based data sharing infrastructure, a trust model and a deployment model to satisfy the requirements of four real-world sharing scenario. Their solution allows the data provider the specify the trust level and the desired sanitization approach. They validated their approach in four pilot projects.
 \subsubsection{Miscellaneous}
 \cite{repetto_adaptive_2023} presents an overarching security scheme and architecture to improve the security of service chains with a intelligence centered approach towards proactive defense and and autonomous response. It was the only work I found that mentions the use of Dataspaces in the context of CTI sharing, altough not delving in details. \cite{coppolino_building_2023} presents a framework for securing smart grids based on FIWARE platform by creating a digital twin complying with Common Information Model. It uses a SIEM system for security monitoring.
 Paice and McKeown \cite{paice_practical_2023} validate the utilization of MISP in the UK energy sector by testing different sharing models implemented by MISP in a simulated environment. 
@@ -257,7 +270,7 @@ dataspaces are usually designed to be decentralized and federated, meaning, ther
 
 \noindent\fbox{%
     \parbox{0.95\textwidth}{%
-    "Dataspaces are defined as: A federated, open infrastructure for sovereign data sharing, based on common policies, rules and standards." \cite{reiberg_what_2022}
+    "Dataspaces are defined as: A federated, open infrastructure for sovereign data sharing, based on common policies, rules, and standards." \cite{reiberg_what_2022}
     }%
 }
 

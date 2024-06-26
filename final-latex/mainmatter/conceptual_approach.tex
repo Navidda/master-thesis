@@ -1,6 +1,6 @@
 \chapter{Conceptual Approach}
 \label{chap:conceptual-approach}
-The goal of this chapter is to derive some precise requirements for the design of a system that can facilitate the sharing of Cyber Threat Intelligence (CTI) in a decentralized manner. This will lay the foundation for the realization of the objectives of this research. To achieve this, we will first discuss our methodology to reach our objectives which is based on design science methodology. We will then try to understand the missing pieces in the current systems that prevent the sharing of CTI in a decentralized manner which is the concept of data sovereignty. We will then discuss the alternative approaches to achieve data sovereignty. Then, we will look at some real-world scenarios where CTI sharing is challenging. Following that, we will derive high-level requirements for a system with the chosen approach. Finally, we will discuss the conceptual approach to achieve these requirements.
+The goal of this chapter is to derive some precise requirements for the design of a system that can facilitate the sharing of Cyber Threat Intelligence (CTI) in a decentralized manner. This will lay the foundation for the realization of the objectives of this research. To achieve this, we will first discuss our methodology to reach our objectives, which is based on design science methodology. We will then try to understand the missing pieces in the current systems that prevent the sharing of CTI in a decentralized manner, which is the concept of data sovereignty. We will then discuss the alternative approaches to achieve data sovereignty. Then, we will look at some real-world scenarios where CTI sharing is challenging. Following that, we will derive high-level requirements for a system with the chosen approach. Finally, we will discuss the conceptual approach to achieve these requirements.
 
 % 12 Pages
 \section{Methodology}
@@ -10,7 +10,7 @@ In this section, we describe the methodology used in this research. In doing so,
 \subsection{Design Science Research (DSR)}
 Design Science Research (DSR) is a research methodology that aims to create and evaluate artifacts to solve real-world problems in the context of Information Systems research \cite{hevner_three_2007}. Our research is also heavily inspired by this approach. Hevner defines a three cycle view of DSR, which consists of relevance, rigor, and design in an inspiring article \cite{hevner_three_2007}. A good DSR research should have adequate progress in each cycle. 
 \subsubsection{Relevance}
-The relevance cycle tries to keep the design research activities relevant to its application's domain. Therefore it involves understanding the problem domain, the stakeholders, the limitations of current systems. It should elicit the requirements to form the basis of the expectencies from the resulting artifact. After the artifact is created, it should be evaluated in terms of its relevance to the problem domain. This take place multiple rounds until the artifact is deemed relevant enough.
+The relevance cycle tries to keep the design research activities relevant to its application's domain. Therefore, it involves understanding the problem domain, the stakeholders, the limitations of current systems. It should form the basis for elicitation of the requirements of the resulting artifact. After the artifact is created, it should be evaluated in terms of its relevance to the problem domain. This take place multiple rounds until the artifact is deemed relevant enough.
 \subsubsection{Rigor}
 The rigor cycle is aimed at ensuring the scientific rigor of the research. This involves grounding the design methods in the existing literature, using appropriate scientific methods. It requires systematically reviewing the existing literature to ensure that the research is innovative. At the end of each cycle, the findings should be shared with the scientific community to get feedback.
 \subsubsection{Design}
@@ -28,9 +28,9 @@ A summary of the DSR methodology is shown in Figure \ref{fig:dsr-cycle}.
 % - how we plan to use DSR
 \subsection{Application of DSR in this Research}
 Our methodology is heavily inspired by the DSR methodology.
-It comprises of two main phases that each consist of multiple iterations.
+It comprises two main phases that each consist of multiple iterations.
 The first phase is the inception phase, where the goal is to understand the main challenges in designing of CTI Dataspace and a conceptual approach of the system.
-In this phase we try to find specific gaps in the current CTI sharing schemes that could be addressed by a Dataspace based solution.
+In this phase, we try to find specific gaps in the current CTI sharing schemes that could be addressed by a Dataspace based solution.
 To do so, we delve into the current CTI sharing scenarios by looking at the existing platforms, the scientific literature, and some guidelines and regulations.
 The next step in this phase is to collect as much as possible information about the Dataspace concept, its promises, and its use cases.
 The subsequent step is to leverage the information gathered in the previous steps to find improvement areas that could be addressed by a Dataspace based solution. After several iterations, we will have a high level understanding of the design of a Dataspace based CTI sharing platform and a real-world scenario where it could highlight its advantages over traditional CTI sharing platforms. This phase is summarized in Figure \ref{fig:inception-phase}.
@@ -54,51 +54,252 @@ In the second phase, construction, we will build an artifact based on the high-l
 \section{High Level Requirements}
 In this section, we will try to understand the high-level requirements of a successful CTI sharing framework. We will justify the importance of each requirement based on real-world scenarios and the literature. We then try to understand which of these requirements are not met by the current systems. 
 
-\subsection{R1 - Federation}
-In this section, we will discuss the importance of federation in CTI sharing. We will try to understand the reason why a centralized repository is not practical and why current CTI sharing is dispersed, what problems does it pose to the participants, what is the importance of federation in CTI sharing, and what are the challenges in achieving it.
+\subsection{Requirement 1: Federated}
+In this section, we will discuss the importance of federation in CTI sharing. We will try to understand the reason a centralized repository is not practical and why current CTI sharing is dispersed, what problems this dispersed CTI sharing pose to the participants, what is the importance of federation in CTI sharing, and what are the challenges in achieving it.
 
 \subsubsection{Decentralized CTI Sharing}
 In the current state of practice in CTI sharing, as mentioned in Section \ref{subsubsec:collaboration-communities}, the sharing of CTI is done in dispersed communities. Each community has its own set of rules, policies, and standards.
-Organizations join these communities based on their interests and requirements.  National Institute of Standards and Technology (NIST) in its guide for CTI sharing \cite{johnson_guide_2016} provides a description of different sharing communities and a selection guide for organizations to choose the right community. There is no one-size-fits all solution for CTI sharing. There are communities around different geographic region, political boundary, industrial sector, business interest, or threat space (e.g., focused on phishing attacks) \cite{johnson_guide_2016}.
-An important aspect is trust in the community. Organizations are more likely to share CTI with a community that they trust. This trust is built over time by the community's ability to protect the shared CTI and the community's ability to provide valuable CTI. It is often not possible to share CTI across communities due the policies or standards incompatibility which results in a fragmented CTI sharing landscape with siloed CTI repositories. 
+Organizations join these communities based on their interests and requirements.  National Institute of Standards and Technology (NIST) in its guide for CTI sharing \cite{johnson_guide_2016} provides a description of different sharing communities and a selection guide for organizations to choose the right community. There is no one-size-fits all solution for CTI sharing. There are communities around some geographic region, political boundary, industrial sector, business interest, or threat space (e.g., focused on phishing attacks) \cite{johnson_guide_2016}.
+An important aspect is trust in the community. Organizations are more likely to share CTI with a community that they trust. This trust is built over time by the community's ability to protect the shared CTI and the community's ability to provide valuable CTI. It is often not possible to share CTI across communities due to the policies or standards incompatibility, which results in a fragmented CTI sharing landscape with siloed CTI repositories. 
 
-\subsubsection{Incompatibile and Siloed CTI}
+% TODO: write about CERTs, PPPs
+
+\subsubsection{Incompatible and Siloed CTI}
 To reach their intelligence goals, organizations often need to join multiple communities \cite{johnson_guide_2016}. However, this puts a significant burden on the participants to manage and integrate the CTI from multiple sources due to several reasons. The lack of interoperability and different standards used by different communities, establishment of trust, and validating data quality are obstacles that participants should overcome \cite{zibak_cyber_2019}. 
 Furthermore, lack of visibility across communities will hinder obtaining the full value from CTI sharing. For example, efforts to detect and mitigate a threat may be duplicated across communities \cite{zibak_cyber_2019}. Also, detection of advanced threats might not be possible because there was not enough information available to detect the threat. Another issue is the vendor lock-in problem, usually with the commercial providers, that is caused by the difficulty of moving from one CTI provider to another.
 
 \subsubsection{Efforts to Achieve Federation}
-To allievate the aforementioned issues a federated approach is required. In a federated approach, the CTI sharing communities are connected in a way that they can share CTI with each other while maintaining their autonomy. This requires a common set of standards, policies, and trust mechanisms that all the communities agree upon. There are some existing standardization efforts. The technical standards like STIX/TAXII (more information in background section \ref{subsubsec:cti-channels}) and the policy standards ISO/IEC27010, NIST, and ENISA report (ref. \ref{subsubsec:regulations}) are in this direction. 
+To alleviate the aforementioned issues, a federated approach is required. In a federated approach, the CTI sharing communities are connected in a way that they can share CTI with each other while maintaining their autonomy. This requires a common set of standards, policies, and trust mechanisms that all the communities agree upon. There are some existing standardization efforts. The technical standards like STIX/TAXII (more information in background section \ref{subsubsec:cti-channels}) and the policy standards ISO/IEC27010, NIST, and ENISA report (ref. \ref{subsubsec:regulations}) are in this direction. 
 
-\subsection{R2 - Interoperable}
-To enable adoption of a common sharing framework by more community and participants, the framework should be easily integrated in existing systems and processes. Therefore, open, non-proprietary standards should be used for expressing the data, protocols for exchanging the data, and the legal framework to specify the policies attached to data should be used.
+\subsection{Requirement 2: Interoperable}
+To facilitate broader adoption of a universal sharing framework by various communities and participants, it is essential that this framework integrates seamlessly with existing systems and processes. This is crucial, as current CTI processes employs many tools to reduce manual work and achieve automation. 
+Consequently, the use of open, non-proprietary standards for data representation, data exchange protocols, and the legal frameworks that define data-related policies is crucial. In the following, we will list some standards and tools that are used in practice, which should be supported by any effective CTI framework to enable greater adoption.
 
-Existing Standards
-\subsection{Trust and Data Sovereignty}
-\subsection{Regulatory Compliance}
-- why current systems are not enough -> Sovereginty
+\subsubsection{Cyber Threat Detection}
+Cyber operations personnel utilize both automated and manual mechanisms to monitor and evaluate cyber operations for the detection of specific cyber threats. This can be done by examining historical evidence, maintaining current situational awareness, or predicting threats through leading indicators. Detection usually involves identifying patterns of cyber threat indicators. For instance, in the event of a confirmed phishing attack with defined indicators, cyber operations personnel may extract observable patterns from these indicators and apply them within the operational environment to identify any signs of the phishing attack \cite{barnum_stix_2012}.
+ENISA published a report named “Proactive Detection of Network Security Incidents” in 2011 \cite{noauthor_proactive_nodate}. Proactive detection of incidents involves identifying malicious activities within a CERT's constituency using internal monitoring tools or external services that report detected incidents before the affected parties are aware. This can be seen as an early warning service, enhancing a CERT's operations, situational awareness, and incident handling efficiency, which is crucial for the core services of national or governmental CERTs \cite{noauthor_proactive_nodate}. Internal tools, or sensors, such as firewalls, antivirus systems, or honeypots, can be deployed by CERTs to monitor events within their network or across a larger enterprise or national constituency (Table \ref{tab:detection-tools}). 
+External services on the Internet, or feeds, provide information about detected incidents to affected parties and can be public, closed, or commercial, often requiring subscription. These services are maintained by various organizations and individuals, offering data feeds that recipients must parse to extract relevant information (Table \ref{tab:detection-tools-ext}) \cite{noauthor_proactive_nodate}.
 
-% 12 Pages
-- Sovereignty by Decentralization
-  promises of IDS
-  usage control
-  comparision
 
-- CTI sharing more challenges more real world 
-  3 pages
-  real world scenarios
+\begin{table}[ht]
+\caption{Internal tools for monitoring and detection \cite{noauthor_proactive_nodate}}
+\label{tab:detection-tools}
+\begin{tabular}{lll}
+    \hline
+    Client honeypots &
+    Server honeypot &
+    Firewall \\
+    Sandboxes &
+    IDS/IPS &
+    Antivirus programs \\
+    NetFlow &
+    Darknet &
+    Passive DNS monitoring \\
+    Spamtrap &
+    Web Application Firewall &
+    Application logs \\
+\end{tabular}
+\end{table}
 
-- High level requirements
-say why each is important
-    - security and trust
-    - policy enforcement
-    - sanitization
-    - content quality (?)
-    - being discoverable (?)
-    - integration with existing systems (?)
-    - information model
+\begin{table}[ht]
+\caption{External feeds for monitoring and detection \cite{noauthor_proactive_nodate}}
+\label{tab:detection-tools-ext}
+\begin{tabularx}{\textwidth}{XXX}
+    \hline
+    MalwareURL &
+    Malware Domain List &
+    Google Safe Browsing Alerts \\
+    IV &
+    Dshield &
+    AusCERT \\
+    EXPOSURE &
+    HoneySpider Network &
+    Cert.br Honeypot Project \\
+    AMaDa &
+    Zeus/SpyEye Tracker &
+    Team Cymru – TC Console \\
+\end{tabularx}
+\end{table}
+% \subsubsection{Copied from Skopik}
+\subsubsection{Correlation Tools}
+Correlation has been shown to be valuable for gaining better insights, eliminating false positives, and detecting duplicates \cite{skopik_problem_2016}. 
+Incident correlation involves comparing different events from multiple sensors and data sources to identify patterns and relationships, helping to pinpoint events related to a single attack or indicating broader malicious activities. 
+This process enhances understanding of events, reduces the workload for handling incidents, and automates the classification and forwarding of incidents relevant to specific constituencies. Correlation is beneficial both for processing data from various tools on a monitored network and for using multiple external services that provide incident data \cite{skopik_problem_2016}.
+An example type of correlation tool is SIEM (Security Information and Event Management) tools, which work on the enterprise level. 
+SIEM tools collect, aggregate, and analyze volumes of data from an organization’s applications, devices, servers, and users in real-time, so security teams can detect and block attacks.
+Enisa, in report \cite{noauthor_detect_2013}, recommends employment of correlation methods to remove false positives and duplicates both in the data provider and the consumer side \cite{skopik_problem_2016}. A summary of some open-source correlation tools are summarized in table \ref{tab:correlation_tools}.
 
-- Conceptual Approach
-    say how each one is achieved in high level
+\begin{table}[h]
+    \centering
+    \caption{Overview of Open-source Correlation Tools \cite{skopik_problem_2016}}
+    \label{tab:correlation_tools}
+    \begin{minipage}{\textwidth}
+        \begin{tabular}{l l p{0.5\textwidth}}
+            \hline
+            \textbf{Tool} & \textbf{Type} & \textbf{Description} \\
+            \hline
+            SEC\footnote{\url{https://simple-evcorr.github.io/}} & Generic & Processes log files to detect event patterns within predefined time windows. \\
+            LogHound\footnote{\url{https://ristov.github.io/}} & Generic & Employs frequent item set mining algorithm to identify patterns in event logs. \\
+            iView\footnote{\url{https://www.cyberoam.com/cyberoamiview.html}} & SIEM & Provides centralized reporting from multiple devices, enhancing visibility across network activities. \\
+            OSSIM\footnote{\url{https://cybersecurity.att.com/products/ossim}} & SIEM & Integrates log management and asset discovery with security information from various controls for enhanced correlation. \\
 
-- fn and nfn requirements
+            Abuse Helper\footnote{\url{https://www.cert.fi/en}, \url{https://www.cert.ee/en}} & Incident handling & Aggregates and correlates Internet abuse information from various sources. \\
+            BGPrank\footnote{\url{https://www.circl.lu/services/bgpranking/}} & Incident handling & Ranks autonomous systems based on the level of malicious activity detected. \\
+            CIF\footnote{\url{https://www.ren-isac.net}} & Incident handling & Compiles threat data from various sources for response, detection, and mitigation of threats. \\
+        \end{tabular}
+    \end{minipage}
+\end{table}
 
+
+
+\subsubsection{Standard Intelligence Representation}
+A crucial prerequisite for a mature and useful cyber threat intelligence and cyber threat information sharing is the availability of an open-standardized and structured ways to represent cyber threat information, and as such, standards like STIX has emerged \cite{barnum_stix_2012}. STIX guiding principles are maximizing expressivity, flexibility, extensibility, automatability, and readability. There are several other standards that are used, \cite{hernandez-ardieta_information_2013} categorizes them into processes and maps them to various knowledge areas. \cite{hernandez-ardieta_information_2013} classifies them into six key knowledge areas, each associated with a specific process (indicated in parentheses): Asset definition (inventory), Configuration guidance (analysis), Vulnerability alerts (analysis), Threat alerts (analysis), risk/attack Indicators (intrusion detection), and Incident Report (management). Table \ref{tab:security-standards} shows the correlation between the standards and these knowledge areas.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+\hline
+     & \rotatebox{90}{CPE}  & \rotatebox{90}{Oval} & \rotatebox{90}{SWID} & \rotatebox{90}{XCCDF \vspace{1em}} & \rotatebox{90}{CCE} & \rotatebox{90}{OCIL} & \rotatebox{90}{CCSS} & \rotatebox{90}{CVE} & \rotatebox{90}{CWE} 
+     & \rotatebox{90}{CVSS} 
+     & \rotatebox{90}{CAPEC \vspace{1em}} & \rotatebox{90}{CVRF} & \rotatebox{90}{MAEC} 
+     % & CybOX  &IndEX& STIX & IODEF & CEE 
+     \\
+\hline
+Asset Definition   & $\bullet$& $\bullet$ &      $\bullet$&        &&      &     &     &    
+&      &       &      &    
+% &        &&      &       &
+\\
+Configuration& & $\bullet$ & & $\bullet$  &$\bullet$& $\bullet$ & $\bullet$ & & 
+& & & & 
+% & &&      &       &     
+\\
+Vulnerabilities& &      $\bullet$&      &        &&      &     &     $\bullet$&     $\bullet$
+&      $\bullet$&       &      $\bullet$&  
+% &        &&      &       &     
+\\
+Threats& &      &      &        &&      &     & $\bullet$ & $\bullet$ 
+&      $\bullet$&       $\bullet$&      &   $\bullet$
+% &        $\bullet$&$\bullet$& $\bullet$ &       $\bullet$&     $\bullet$
+\\
+Incidents&      $\bullet$&      &      &        &&      &     $\bullet$&     &  
+&      &       &      $\bullet$&      $\bullet$
+% &        $\bullet$&$\bullet$&      $\bullet$& $\bullet$ &     $\bullet$
+\\
+Risk&      $\bullet$&      $\bullet$&      &        &$\bullet$&      &     &     $\bullet$&     $\bullet$
+&      $\bullet$&       &      &      $\bullet$
+% &        &$\bullet$&      $\bullet$&       $\bullet$& 
+\\
+\hline
+\end{tabular}
+\caption{cybersecurity standards and knowledge areas \cite{hernandez-ardieta_information_2013}}
+\label{tab:security-standards}
+\end{table}
+
+
+\subsubsection{Intelligence Sharing Tools}
+To analyze and share high-level threat intelligence data, some tools have emerged. OpenIOC is an open framework for sharing threat intelligence using an XML schema to describe technical characteristics of threats, primarily focusing on file-based Indicators of Compromise (IoCs), and is widely used within the Mandiant product community. On the other hand, the Malware Information Sharing Platform (MISP) is an open-source tool developed by Belgian Defense CERT and NATO NCIRC, providing a central database for IoCs and enabling automated sharing and integration with other systems, including support for generating various outputs like IDS and XML \cite{skopik_problem_2016}. For a more comprehensive list, refer to table \ref{tab:tips}.
+
+\subsubsection{Course of Action}
+After analysis of the threat data, the analyst might define suggested Course of Action (CoA), or Playbooks. This could be preventive, to prevent the occurrence of the cyber incident, or responsive, to mitigate and alleviate the ongoing or past cyber incident. In order to automate the tasks of the response, some Security Orchestration, Automation, and Response
+(SOAR) products has emerged. Furthermore, some machine-readable formats for expressing this courses of action has been emerged. Schlette et al. \cite{schlette_comparative_2021} provide a comparative analysis of these formats. Some of these formats and products are summarized in table \ref{tab:response}.
+
+\begin{table}[ht]
+    \begin{tabularx}{\textwidth}{XXXX}
+        \hline
+        Category & Format/Name & Inception & Maintainer / Vendor \\
+        \hline
+        \hline
+        Format & CACAO & 2017 & OASIS \\
+        Format & COPS & 2016 & DEMISTO \\
+        Format & IACD & 2014 & DHS / NSA / JHU \\
+        Format & OPENC2 & 2015 & OASIS \\
+        Format & RE\&CT & 2019 & ATC Project \\
+        Format & RECAST & 2018 & MITRE \\
+        SOAR & TheHive \& Cortex & 2014 & TheHive Project \\
+        SOAR & Cortex XSOAR & 2015 & Palo Alto Networks \\
+        SOAR & Splunk Phantom & 2014 & Splunk \\
+        SOAR & ThreatConnect & 2011 & ThreatConnect \\
+    \end{tabularx}
+    \caption{Incident Response Formats and Products \cite{schlette_comparative_2021}}
+    \label{tab:response}
+\end{table}
+    
+\subsection{Requirement 3: Trusted}
+
+\subsubsection{Trust Establishment and Maintenance}
+Wagner et al. \cite{wagner_cyber_2019} provide a survey of aspects related to trust in the context of CTI sharing. Their key findings are as follows:
+Establishing a Cyber Threat Intelligence (CTI) sharing collaboration requires building a comprehensive trust relationship among stakeholders, which is often achieved through time and face-to-face interactions. 
+This is particularly challenging among decentralized stakeholders. 
+CTI might contain sensitive information such as Personally Identifiable Information (PII) that should only be shared with trusted stakeholders to prevent misuse and protect reputation. 
+Trustworthiness could be evaluated through direct contact and opinions of other peers. Three main trust relationships are identified: protecting confidential data, correct information handling, and credibility of shared information. Trust issues can arise from stakeholders initially behaving benignly and later abusing trust. Trust schemes consider factors like reputation, past outcomes, and stability. Challenges also include potential government involvement in CTI exchange protocols like STIX and TAXII, which might deter non-US stakeholders. Trust can be managed by third parties or trust managers. CTI sharing levels of trust are categorized as high, medium, or low confidence, depending on the verification of sources. Trust relationships are often personal, meaning if a key employee leaves, the trust network may be disrupted. Trust bases are defined by stakeholder contribution, collective actions, and shared experiences, with trust evaluation being situation-specific. Sharing systems must implement a continuous vetting process to identify malicious peers early. Additionally, stakeholders should anonymize their content as much as possible and conceal system-specific details \cite{wagner_cyber_2019}.
+
+\subsubsection{Participant Reputation}
+Stakeholders must establish their reputation to become trusted members of a threat-sharing community. Reputation is developed over time by consistently sharing high-quality, actionable threat information and adhering to threat-sharing policies. To enhance credibility, stakeholders should continuously share CTI, correlate information from various sources, and respond to community inquiries about the shared intelligence. Conversely, once a bad reputation is established, it is difficult to reverse \cite{wagner_cyber_2019}. 
+
+\subsubsection{Privacy \& Anonymity}
+Organizations must prioritize client privacy by sharing Cyber Threat Intelligence (CTI) only with trusted stakeholders or by anonymizing the content. Techniques like k-Anonymity, l-Diversity, t-Closeness, ε-Differential privacy, and Pseudonymization are used for anonymization. Despite these measures, stakeholders are often hesitant to share information due to fear of reputational damage. Encrypting CTI is crucial to prevent interception, with protocols like PRACIS designed for secure data forwarding. Anonymity is essential when stakeholders prefer not to disclose a breach but still want to share intelligence. This involves removing personally identifiable information (PII) from content, metadata, and data transfers, potentially automated through regular expressions. Different stakeholders have varying perceptions of anonymity, necessitating adjustable masking criteria. Routing connections through networks like TOR can further enhance anonymity. Encrypting CTI ensures that sensitive information cannot be exploited before vulnerabilities are addressed, maintaining implicit privacy \cite{wagner_cyber_2019}.
+
+\subsection{Requirement 4: Regulatory Compliant}
+Sharing cyber threat intelligence (CTI) is heavily influenced by policies and regulations, as such a successful approach involves both technical and policy measures.
+
+\subsubsection{Regulations}
+Organizations must comply with country-specific privacy laws and regulations regarding security breach notifications. There are two main regulatory directions influencing CTI sharing. First, privacy laws that hinder sharing. In Europe, GDPR is a comprehensive privacy law protecting information about EU citizens, by limiting sharing of Personally Identifiable Information (PII). Likewise, In the US, acts like Electronic Communications Privacy Act
+(ECPA) and Foreign Intelligence Surveillance Act (FISA) restrict voluntary disclosure of communications content. CTI may include information that is permissible to share in one country but prohibited in another. For example, the UK Data Protection Act does not classify IP addresses as personal information, whereas a German court ruled in 2016 that IP addresses can be personal information in certain situations. Therefore, Organizations must ensure they adhere to national privacy laws, especially when sharing CTI with international stakeholders. There are research investigating whether static and dynamic IP addresses are personal details according to the GDPR. The findings revealed, if IP addresses are shared as threat intelligence, then it can be justified in the public interest under Article 6 (1)(e) of the GDPR \cite{wagner_cyber_2019}.
+
+Second, the security breach notification laws aiming to increase the overall security posture of its constituency. In Europe, there is NIS directive and its successor, NIS2, which mandates CTI sharing. Likewise, executive orders like EO13636 promote information sharing in the US. Furthermore, there are country-specific regulations that differ in each jurisdiction. For instance, Slovenia requires communication vulnerabilities to be reported to SI-CERT, while Belgium mandates reporting to its national regulator \cite{wagner_cyber_2019}. The regulations are summarized in table \ref{tab:regulations}.
+
+\begin{table}[ht]
+    \caption{CTI Sharing Regulations \cite{wagner_cyber_2019}}
+    \label{tab:regulations}
+    \begin{tabularx}{\textwidth}{XXX}
+        \hline
+        Type & Regulation & Jurisdiction  \\
+        \hline
+        \hline
+        Prohibition & ECPA & US \\
+        Prohibition & DPA & UK \\
+        Prohibition & GDPR & Europe \\
+        Obligation & Electronic Communication Act & Slovenia \\
+        Obligation & Cybersecurity Information Sharing Act (CISA) & US \\
+        Obligation & NIS/NIS2 & Europe \\
+        Obligation & EO13636 & US \\
+    \end{tabularx}
+\end{table}
+
+
+\subsubsection{Internal Policies}
+If an organization decides to share their CTI, a clausal for information has
+to be included or updated in existing policies.
+\cite{dandurand_towards_2013} introduces Information Exchange Policies (IEP) to which all information exchange with other stakeholders has to go through.
+\cite{serrano_design_2014} identified the following elements that must be included in the IEP: scope, purpose, sharing procedure, data handling, policy modification procedures, accepted uses of data, and intellectual property rights.
+
+\cite{martinelli_formal_2012} introduced Data Sharing Agreement’s (DSA) for interorganizational data sharing, which covers the following aspects: data quality, obligations, trust domain, security infrastructure.
+
+The ISO/IEC standardization body proposed ISO 27010:2015 Information technology – Security techniques – Information security management
+for inter-sector and interorganizational communications, which provides recommendation for parties sharing information with one another \cite{noauthor_isoiec_nodate}.
+
+Ethics in data sharing has to be part of the information
+sharing policy. Stakeholders should define for which purpose the CTI is used, who can access it, retention periods and destruction, and condition of publication \cite{wagner_cyber_2019}. 
+
+A summary of the policies is presented in table \ref{tab:policies}.
+
+
+\begin{table}[ht]
+    \caption{CTI Sharing Standard Policies \cite{wagner_cyber_2019}}
+    \label{tab:policies}
+    \begin{tabularx}{\textwidth}{XXX}
+        \hline
+        Policy & Suggested Clauses & References  \\
+        \hline
+        \hline
+        Information Exchange Policies (IEP) & purpose, scope, participants, sharing procedures, data handling, policy modification procedures, uses of data & \cite{dandurand_towards_2013}, \cite{serrano_design_2014} \\
+        Data Sharing Agreement’s (DSA) & data quality, obligations, trust domain, security infrastructure & \cite{martinelli_formal_2012} \\
+        ISO/IEC 27010:2015 & -- & \cite{noauthor_isoiec_nodate} \\
+    \end{tabularx}
+\end{table}
+
+
+\subsection{Requirement 5: Commercial Ecosystem}
+Finding incentives for active participation in CTI sharing activities is challenging for some organizations \cite{zibak_cyber_2019}. They anticipate gaining insights from other community members without providing any valuable input. This results in a “Free riding” effect \cite{wagner_cyber_2019}. There are punishment models proposed for the free riders in a CTI exchange \cite{wagner_cyber_2019}, however, the inherent heterogeneity of organizations means their ability to generate and share intelligence varies, making equal knowledge exchange unrealistic. Engaging organizations in threat-sharing collaborations can be challenging and resource draining. Further, It is believed that organizations are more likely to contribute if they expect reciprocal benefits \cite{wagner_cyber_2019}. Therefore, economic aspects are crucial in CTI sharing. Zibak \cite{zibak_cyber_2019} mentions lack of incentives and return on investments as a barrier in CTI sharing.
+Perceived lack of immediate return on investment from dedicating resources to a threat intelligence team \cite{wagner_cyber_2019}. 
+There are obligations to share CTI such as NIS2, however, monetary incentivization is also necessary. To address this, the US Congress proposed the Cyber Information Sharing Tax Credit Act, offering a tax credit as a financial incentive for organizations that share CTI with other stakeholders \cite{wagner_cyber_2019}. Danurand et al. tried to address CTI sharing barriers in \cite{dandurand_towards_2013} by designing an infrastructure for sharing activities. He mentions “Enable Commercial Activities” as one of the high level requirements of a successful sharing infrastructure. He goes on to add, the private sector will be more inclined to engagement if accounting models and functionalities for selling data or data-related services. This will enhance the quality of data available. Therefore, diverse accounting models for data usage and mechanisms for controlling the dissemination of exchanged data under commercial contract terms are helpful. Organizations must have the capabilities to sell any data element, and professional services based on CTI data such as quality control, correlation, and translation. By supporting commercial activities, the industry's vast resources and expertise to procure the CTI data could be leveraged, thus, increasing the quality of data and keeping the costs low due to competition \cite{dandurand_towards_2013}.
